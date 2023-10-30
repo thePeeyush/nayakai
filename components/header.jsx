@@ -8,8 +8,8 @@ export default function Header() {
         <div className='w-1/3'>
         <NavBar/>
         </div>
-        <div className=' flex flex-row gap-2 w-1/3 min-w-fit  lg:rounded-r-full items-center justify-center'>
-          <Image src="/logoLight.png" width={100} height={100} className='w-14 rounded-full'/>
+        <div className=' flex flex-row w-1/3 min-w-fit  lg:rounded-r-full items-center justify-center'>
+          <Image src="/logoLight.png" width={100} height={100} className='w-14 rounded-full' alt='logo'/>
           <h1 className='font-bold text-2xl text-gray-950'>NAYAK <span className='font-thin'>AI</span></h1>
         </div>
         <div className="flex flex-row gap-2 items-center justify-end w-1/3">

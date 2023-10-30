@@ -9,7 +9,7 @@ import { usePathname } from 'next/navigation';
 export default function Nav() {
     const pathname = usePathname();
   return (
-    <nav className={`bg-opacity-30 backdrop-blur-lg fixed w-full lg:w-fit lg:h-screen lg:py-6 bottom-0 pb-2 pt-3 lg:relative z-10 ${pathname === "/chat" && "hidden lg:block"}`}>
+    <nav className={` bg-opacity-50 backdrop-blur-lg fixed lg:border-r w-full lg:w-fit lg:h-screen lg:py-6 bottom-0 pb-2 pt-3 lg:relative z-10 ${pathname === "/chat" && "hidden lg:block"}`}>
         <ul className='flex flex-row justify-cente lg:px-4  lg:flex-col lg:gap-4 '>
           <li className={` w-1/4 lg:w-auto text-center text-gray-900 ${pathname === "/"         && "activelink"}`}><Link href="/"         className='flex flex-col lg:px-8 lg:py-2 lg:flex-row justify-center lg:justify-start lg:gap-4 gap-1 items-center text-2xl'><GoHomeFill/><p className='text-xs lg:text-lg'>Home</p></Link></li>
           <li className={` w-1/4 lg:w-auto text-center text-gray-900 ${pathname === "/chat"     && "activelink"}`}><Link href="/chat"     className='flex flex-col lg:px-8 lg:py-2 lg:flex-row justify-center lg:justify-start lg:gap-4 gap-1 items-center text-2xl'><BsFillChatLeftTextFill/><p className='text-xs lg:text-lg'>Chat</p></Link></li>
