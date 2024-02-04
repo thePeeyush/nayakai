@@ -27,3 +27,7 @@ body {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+.track::-webkit-scrollbar-track{
+  margin-top: 4rem;
+}

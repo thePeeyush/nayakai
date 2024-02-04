@@ -3,7 +3,7 @@
 import { BsMic } from 'react-icons/bs';
 import { BiSend } from 'react-icons/bi';
 import { useState } from 'react';
-import { useChatStore } from '@/state-store/chatStore';
+import { useOurStore } from '@/state-store/Store';
 import { RiChatNewLine } from 'react-icons/ri';
 
 
@@ -11,9 +11,9 @@ export default function ChatInput() {
 
   const [text,setText] = useState("")
 
-  const addChat = useChatStore((state)=>state.addChat);
-  const resetChat = useChatStore((state)=>state.resetChat);
-  const setLoading = useChatStore((state)=>state.setLoading);
+  const addChat = useOurStore((state)=>state.addChat);
+  const resetChat = useOurStore((state)=>state.resetChat);
+  const setLoading = useOurStore((state)=>state.setLoading);
 
   const handleSubmit = async () =>{
     if(text != ""){
@@ -30,7 +30,7 @@ export default function ChatInput() {
   }
 
   const getAnswer = async(text) =>{
-    const response = await fetch("https://nayakai.vercel.app/api/chat", {
+    const response = await fetch("/api/chat", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

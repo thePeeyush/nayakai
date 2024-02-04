@@ -1,35 +1,41 @@
 import LawyerCard from "@/components/LawyerCard";
 import Searchbox from "@/components/Searchbox";
-import {VscSettings} from "react-icons/vsc"
+import getUrl from "@/utils/getUrl";
+import generateUniqueId from "@/utils/newid";
 
-export default function Page() {
+async function getLawyers(searchParams) {
+
+  const curUrl = getUrl() ;
+
+  let url = '';
+  if (searchParams.search) {
+    url = `${curUrl}/api/lawyers?search=${searchParams.search}`
+  } else url = `${curUrl}/api/lawyers/`
+
+  const res = await fetch(url, { cache: "no-store" });
+
+  if (!res.ok) {
+    throw new Error(`Failed to fetch data`);
+  }
+  return res.json();
+}
+
+export default async function Page({ searchParams }) {
+  const Lawyers = await getLawyers(searchParams);
   return (
-    <div className="p-4 lg:px-16 overflow-y-scroll w-full">
-      <div className="flex items-center gap-2">
-      <Searchbox text={"Lawyers"}/>
-      <VscSettings className="text-2xl cursor-pointer hover:text-gray-700"/>
-      </div>
-      <div className="w-full flex flex-wrap gap-2 lg:gap-6 mb-20">
-     <LawyerCard/>
-     <LawyerCard/>
-     <LawyerCard/>
-     <LawyerCard/>
-     <LawyerCard/>
-     <LawyerCard/>
-     <LawyerCard/>
-     <LawyerCard/>
-     <LawyerCard/>
-     <LawyerCard/>
-     <LawyerCard/>
-     <LawyerCard/>
-     <LawyerCard/>
-     <LawyerCard/>
-     <LawyerCard/>
-     <LawyerCard/>
-     <LawyerCard/>
-     <LawyerCard/>
-     <LawyerCard/>
+
+    <div className="p-4 lg:px-16 mt-16 overflow-y-scroll w-full">
+      <Searchbox text={"Lawyers"} />
+      {Lawyers.message === 'Error' ? <h1>! Failed to fetch data</h1> : (
+        <div className="w-full flex flex-wrap gap-2 lg:gap-6 mb-20">
+          {Lawyers.result.length < 1 ? <h1 className="text-center lg:text-left lg:pt-20 lg:pl-40 text-red-400 w-full pt-[30vh]">! Not Found</h1> : Lawyers.result.sort((a, b) => b.rating - a.rating).map((lawyer) => {
+            return (
+              <LawyerCard key={generateUniqueId} information={lawyer} />
+            )
+          })}
+        </div>
+      )}
+
     </div>
-    </div>
-  );
+  )
 }

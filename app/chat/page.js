@@ -2,12 +2,12 @@
 import LoadingChat from "@/components/LoadingChat";
 import MessageLeft from "@/components/message-left";
 import MessageRight from "@/components/message-right";
-import { useChatStore } from "@/state-store/chatStore";
+import { useOurStore } from "@/state-store/Store";
 import { useEffect, useRef } from "react";
 
 export default function Page() {
-    const chat = useChatStore((state)=>state.chat);
-    const loadingChat = useChatStore((state)=>state.loadingChat);
+    const chat = useOurStore((state)=>state.chat);
+    const loadingChat = useOurStore((state)=>state.loadingChat);
     const DivRef  = useRef(null);
 
     useEffect(()=>{
