@@ -15,12 +15,12 @@ const Translatebtn = () => {
             </div>
             <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
                 <li onClick={(e)=>{changeLanguage(e.target.innerText)}} className=''><a>English</a></li>
-                <li onClick={(e)=>{changeLanguage(e.target.innerText)}} className=''><a>Hindi</a></li>
+                {/* <li onClick={(e)=>{changeLanguage(e.target.innerText)}} className=''><a>Hindi</a></li>
                 <li onClick={(e)=>{changeLanguage(e.target.innerText)}} className=''><a>Punjabi</a></li>
                 <li onClick={(e)=>{changeLanguage(e.target.innerText)}} className=''><a>Sanskrit</a></li>
                 <li onClick={(e)=>{changeLanguage(e.target.innerText)}} className=''><a>Tamil</a></li>
                 <li onClick={(e)=>{changeLanguage(e.target.innerText)}} className=''><a>Marathi</a></li>
-                <li onClick={(e)=>{changeLanguage(e.target.innerText)}} className=''><a>Gujrati</a></li>
+                <li onClick={(e)=>{changeLanguage(e.target.innerText)}} className=''><a>Gujrati</a></li> */}
             </ul>
         </div>
     )

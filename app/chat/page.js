@@ -1,7 +1,7 @@
 "use client"
 import LoadingChat from "@/components/LoadingChat";
-import MessageLeft from "@/components/message-left";
-import MessageRight from "@/components/message-right";
+import MessageLeft from "@/components/message-ai";
+import MessageRight from "@/components/message-user";
 import { useOurStore } from "@/state-store/Store";
 import { useEffect, useRef } from "react";
 
@@ -17,7 +17,7 @@ export default function Page() {
     
 return (
     <div className="w-full h-full overflow-y-scroll scroll-auto chatRoot px-2" ref={DivRef}>
-       <div className="max-w-4xl mx-auto my-20 transition-transform">
+       <div className="max-w-4xl mx-auto my-20 transition-transform flex flex-col gap-8">
        <MessageLeft text={"Hello, I am your legal advisor, please tell me how I can help you."}/>
        {
         chat.map((chat)=>{
