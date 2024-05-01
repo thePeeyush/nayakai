@@ -5,18 +5,18 @@ import { BsChevronLeft } from 'react-icons/bs';
 import { CgMenuLeft } from 'react-icons/cg';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
-import AccountBar from './AccountBar';
 import { useOurStore } from '@/state-store/Store';
 
-const NavBar = () => {
+const NavBar = ({children}) => {
   const pathname = usePathname();
-  const toggleNav = useOurStore((state)=>state.toggleNav);
   return (
      <div className='flex flex-row gap-3 items-center'>
-        <div className='cursor-pointer text-2xl text-gray-950'>
-           {pathname === "/chat" ? (<Link href="/"><BsChevronLeft/></Link>): (<CgMenuLeft onClick={toggleNav}/>) }
+        <div className={`cursor-pointer text-2xl text-gray-950 md:hidden ${pathname !== "/chat" && 'hidden' }`}>
+           <Link href="/"><BsChevronLeft/></Link>
         </div>
-        <AccountBar text={"Peeyush"}/>
+        {
+         children
+        }
      </div>
   )
 }

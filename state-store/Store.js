@@ -11,9 +11,6 @@ export const useOurStore = create(
         language:"English",
         changeLanguage: (text)=>set(()=>({language:text})),
 
-        navToggle:false,
-        toggleNav: ()=>set((state)=>({navToggle:!state.navToggle})),
-
         sortBy:null,
         setSort: (order)=>set(()=>({sortBy:order})),
 

@@ -3,7 +3,7 @@ import Image from 'next/image'
 
 export default function Home() {
   return (
-    <div className='flex flex-wrap justify-center w-full overflow-y-auto lg:-ml-36 pt-5 lg:pt-16 track'>
+    <div className='flex flex-wrap justify-center w-full overflow-y-auto lg:-ml-36 pt-5 lg:pt-16 gap-4'>
     <Card/>
     <Card/>
     <Card/>
