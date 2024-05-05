@@ -5,8 +5,6 @@ import { RiContactsFill } from 'react-icons/ri';
 import { BsFillChatLeftTextFill , BsTelephoneFill } from 'react-icons/bs';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useOurStore } from '@/state-store/Store';
-import { useEffect } from 'react';
 
 export default function Nav() {
     const pathname = usePathname();

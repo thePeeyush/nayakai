@@ -5,7 +5,6 @@ import { BsChevronLeft } from 'react-icons/bs';
 import { CgMenuLeft } from 'react-icons/cg';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
-import { useOurStore } from '@/state-store/Store';
 
 const NavBar = ({children}) => {
   const pathname = usePathname();

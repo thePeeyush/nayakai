@@ -1,15 +1,38 @@
 import Image from 'next/image'
 import React from 'react'
-  
-const AccountBar = ({text}) => {
+import { auth } from '@/auth'
+import SignIn from './SignInBtn'
+import { signOut } from '@/auth'
+
+const AccountBar = async () => {
+  const session = await auth()
+  if (session?.user !== undefined) {
     return (
       <div className="hidden md:flex flex-row justify-between items-center gap-3 p-3">
-              <div className="flex flex-row items-center gap-4 w-full">
-                <Image src="/logo.png" width={100} height={100} className='bg-gray-800 w-8 rounded-full' alt='profile picture'/>
-                <h2 className='font-medium text-lg'>{"Hello " + text}</h2>
-              </div>
+        <div className="flex flex-row items-center gap-4 w-full">
+          <div className="tooltip tooltip-right" data-tip={session.user.name}>
+          <Image src={session.user.image} width={100} height={100} className='bg-gray-800 w-8 rounded-full tooltip' data-tip="hello" alt='profile picture' />
           </div>
+          <SignOut />
+        </div>
+      </div>
     )
   }
+  return <SignIn />
+}
 
 export default AccountBar
+
+const SignOut = () => {
+  return (
+    <form
+      action={async () => {
+        "use server"
+        await signOut()
+      }}
+    >
+      <button type="submit">Sign Out</button>
+    </form>
+  )
+
+}

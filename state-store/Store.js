@@ -14,5 +14,8 @@ export const useOurStore = create(
         sortBy:null,
         setSort: (order)=>set(()=>({sortBy:order})),
 
+        chatContactDisplay:true,
+        setChatContactDisplay: (bool)=>set(()=>({chatContactDisplay:bool})),
+
     })
 )

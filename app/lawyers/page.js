@@ -15,34 +15,43 @@ async function getLawyers(searchParams) {
   const res = await fetch(url, { cache: "no-store" });
 
   if (!res.ok) {
-    throw new Error(`Failed to fetch data`);
+    // throw new Error(`Failed to fetch data`);
   }
   return res.json();
 }
 
-export default async function Page({ searchParams }) {
-  const Lawyers = await getLawyers(searchParams);
+export default function Page({ searchParams }) {
+
   return (
 
     <div className="p-4 lg:px-16 mt-16 overflow-y-scroll w-full">
       <Searchbox text={"Lawyers"} />
-      <Suspense fallback={<Loading/>}>
-      {Lawyers.message === 'Error' ? <h1>! Failed to fetch data</h1> : (
-        <div className="w-full flex flex-wrap gap-2 lg:gap-6 mb-20">
-          {Lawyers.result.length < 1 ? <h1 className="text-center lg:text-left lg:pt-20 lg:pl-40 text-red-400 w-full pt-[30vh]">! Not Found</h1> : Lawyers.result.sort((a, b) => b.rating - a.rating).map((lawyer) => {
-            return (
-              <LawyerCard key={generateUniqueId} information={lawyer} />
-            )
-          })}
-        </div>
-      )}
+      <Suspense fallback={<Loading />}>
+        <LawyersSection searchParams={searchParams} />
       </Suspense>
     </div>
   )
 }
 
 function Loading() {
-  return(
-    <h1>🌀Loading...</h1>
+  return (
+    <h1 className="mt-20 ml-40">🌀Loading...</h1>
+  )
+}
+
+const LawyersSection = async ({ searchParams }) => {
+  const Lawyers = await getLawyers(searchParams) || { message: 'Error' };
+  if (Lawyers.message === 'Error') {
+    return <h1 className="mt-20 ml-40">! Failed to fetch data</h1>
+  }
+
+  return (
+    <div className="w-full flex flex-wrap gap-2 lg:gap-6 mb-20">
+      {Lawyers.result.length < 1 ? <h1 className="text-center lg:text-left lg:pt-20 lg:pl-40 text-red-400 w-full pt-[30vh]">! Not Found</h1> : Lawyers.result.sort((a, b) => b.rating - a.rating).map((lawyer) => {
+        return (
+          <LawyerCard key={generateUniqueId} information={lawyer} />
+        )
+      })}
+    </div>
   )
 }
