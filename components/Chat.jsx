@@ -10,6 +10,7 @@ import { useEffect, useRef } from "react";
 export default function Chat() {
     const chat = useOurStore((state)=>state.chat);
     const loadingChat = useOurStore((state)=>state.loadingChat);
+    const chatContactDisplay = useOurStore(s=>s.chatContactDisplay);
     const DivRef  = useRef(null);
 
     useEffect(()=>{
@@ -17,7 +18,7 @@ export default function Chat() {
     },[chat])
     
 return (
-    <div className="w-full h-full overflow-y-scroll scroll-auto chatRoot px-2" ref={DivRef}>
+    <div className={`w-full h-full overflow-y-scroll scroll-auto chatRoot px-2 ${chatContactDisplay?'hidden':'block'}`} ref={DivRef}>
        <div className="max-w-4xl mx-auto my-20 transition-transform flex flex-col gap-8">
        <MessageAi text={"Hello, I am your legal advisor, please tell me how I can help you."}/>
        {

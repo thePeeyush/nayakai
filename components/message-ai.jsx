@@ -13,7 +13,7 @@ export default function MessageAi({text}) {
       <div className=" py-1 px-4 text-gray-950 ">
         <TextGenerateEffect words={text}/>
       </div>
-      <div className="px-1 py-2 mr-16 text-gray-400 hover:text-gray-800 cursor-pointer"><BiVolumeFull onClick={()=>handleSpeaker(text)}/></div>
+      <div className="px-1 py-2 text-gray-400 hover:text-gray-800 cursor-pointer"><BiVolumeFull onClick={()=>handleSpeaker(text)}/></div>
       </div>
     )
   }
