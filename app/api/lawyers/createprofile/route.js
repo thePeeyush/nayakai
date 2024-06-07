@@ -2,16 +2,23 @@ import Lawyer from "@/models/Lawyer";
 import connectDB from "@/utils/db";
 import generateUniqueId from "@/utils/newid"; 
 import { NextResponse } from "next/server";
+import {auth} from "../../../../auth";
 
 export async function POST(request) {
     const {name,dob,phone,degree,state,district,city} = await request.json();
+    const session = await auth();
+    if (!session) {
+        return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+    }
+    const userID = session.user.id;
+    console.log(userID);
     try {
         console.log('connecting----🛠️')
         await connectDB();
         console.log('✅:::::::::connected')
 
         const createLawyer = await Lawyer.create({
-            uid: generateUniqueId() ,
+            uid: userID,
             name: name,
             age: dob,
             phone: phone,

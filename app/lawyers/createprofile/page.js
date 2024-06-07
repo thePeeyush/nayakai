@@ -4,6 +4,7 @@ import {useForm} from "react-hook-form"
 import * as z from 'zod'
 import { zodResolver } from "@hookform/resolvers/zod";
 import getUrl from "@/utils/getUrl";
+import { useRouter } from "next/navigation";
 
 export default function Page() {
 
@@ -27,9 +28,12 @@ export default function Page() {
     });
     
     const [submited,setSubmited] = useState(false);
+    const [btnClick,setBtnClick] = useState(false);
+    const router = useRouter();
 
 
     const onSubmit = async (data) =>{
+        setBtnClick(true);
         const response = await fetch(`${curUrl}/api/lawyers/createprofile`, {
             method: "POST",
             headers: {
@@ -39,8 +43,11 @@ export default function Page() {
           });
           if (response.ok) {
             setSubmited(true);
+            setTimeout(() => {
+                router.push('/')
+            }, 1000);
           }
-        console.log(data);
+          setBtnClick(false);
     }
 
     return (
@@ -54,7 +61,7 @@ export default function Page() {
                 <Input register={register} name={"state"} question={"Address : State?"} placeholder={"state like Madhya Pradesh"} label={errors.state && errors.state.message}/>
                 <Input register={register} name={"district"} question={"Address : District?"} placeholder={"your district"} label={errors.district && errors.district.message}/>
                 <Input register={register} name={"city"} question={"Address : City?"} placeholder={"your city"} label={errors.city && errors.city.message}/>
-                <button type="submit" className="btn">SUBMIT</button>
+                <button type="submit" disabled={btnClick} className="btn">SUBMIT</button>
             </form> : <h1 className="indicator-item indicator-center indicator-middle badge badge-success"> ✅ Done</h1> }
         </div>
     );

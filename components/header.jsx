@@ -1,10 +1,11 @@
 import NavBar from './NavBar';
-import Translatebtn from './Translatebtn';
 import AccountBar from './AccountBar';
+import Link from 'next/link';
+import { IoCreateOutline } from "react-icons/io5";
 
 export default function Header() {
   return (
-    <header className=' fixed top-0 w-full flex flex-row justify-between items-center p-1 px-4 lg:border-b border-gray-200 shadow-md bg-white lg:bg-opacity-40 shadow-white backdrop-blur-md z-30 '>
+    <header className=' fixed top-0 w-full flex flex-row justify-between items-center p-1 px-4 lg:border-b border-gray-200 bg-white bg-opacity-40 backdrop-blur-md z-30 '>
         <div className='w-1/4 '>
         <NavBar>
           <AccountBar/>
@@ -14,7 +15,14 @@ export default function Header() {
           <h1 className='font-bold text-2xl text-gray-950'>NAYAK <span className='font-thin'>AI</span></h1>
         </div>
         <div className='w-1/4'>
-          <Translatebtn/>
+          <div className="flex gap-2 items-center justify-end pr-4">
+            <Link href="/post">
+              <div className="flex">
+              <IoCreateOutline className='text-2xl'/>
+              <h1 className='hidden md:block pt-[2px]'>Post</h1>
+              </div>
+            </Link>
+          </div>
         </div>
       </header>
   )

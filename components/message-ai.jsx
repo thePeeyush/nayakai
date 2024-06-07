@@ -1,6 +1,6 @@
 import { BiVolumeFull } from 'react-icons/bi';
-import { BsRobot } from "react-icons/bs";
 import { TextGenerateEffect } from './generateText';
+import { HiOutlineSparkles } from "react-icons/hi2";
 
 export default function MessageAi({text}) {
   const handleSpeaker = (text) => {
@@ -9,7 +9,7 @@ export default function MessageAi({text}) {
   }
     return (
       <div className='flex justify-start p-2'>
-        <BsRobot className='text-3xl min-w-7'/>
+        <HiOutlineSparkles className='text-3xl min-w-7'/>
       <div className=" py-1 px-4 text-gray-950 ">
         <TextGenerateEffect words={text}/>
       </div>
