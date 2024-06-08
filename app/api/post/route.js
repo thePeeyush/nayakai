@@ -1,10 +1,10 @@
 import { NextResponse } from "next/server";
 import z from 'zod';
-import generateUniqueId from "../../../utils/newid";
+import generateUniqueId from "@/utils/newid";
 import connectDB from "@/utils/db";
-import Post from "../../../models/post";
-import { auth } from "../../../auth";
-import signuploadform from "../../../utils/uploadSignature";
+import Post from "@/models/post";
+import { auth } from "@/auth";
+import signuploadform from "@/utils/uploadSignature";
 
 export async function POST(request) {
     const body = await request.json();

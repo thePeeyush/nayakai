@@ -36,7 +36,7 @@ const calculateTime = (date) => {
       <h1 className="w-full px-4 pb-1" >
        {content}
       </h1>
-      <div className="outline-dashed outline-1 outline-gray-100 carousel carousel-center mx-4 rounded-md max-h-[600px] relative">
+      <div className="outline-dashed outline-1 outline-gray-100 carousel carousel-center mx-4 rounded-md max-h-[500px] relative">
         {media.map((item, index) => {
           return (
             <div key={index} className="carousel-item w-full relative">
@@ -47,7 +47,7 @@ const calculateTime = (date) => {
           )
         })}
       </div>
-      <div className="flex w-full justify-between text-sm text-gray-500">
+      <div className="flex w-full justify-around text-sm text-gray-500">
         <Btn color={'hover:text-green-500'} bgColor={'hover:bg-green-500'} title={likes}><PiTriangleThin /> </Btn>
         <Btn color={'hover:text-red-500'} bgColor={'hover:bg-red-500'} title={dislikes}><PiTriangleThin className="rotate-180" /> </Btn>
         <Btn color={'hover:text-blue-500'} bgColor={'hover:bg-blue-500'} title={comments.length}><CiChat1 /> </Btn>

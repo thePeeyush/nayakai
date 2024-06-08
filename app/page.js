@@ -17,7 +17,7 @@ export default async function Home() {
   const posts = await fetchPosts()
   return (
     <Suspense fallback={<Loading />}>
-      <div className='w-full overflow-y-auto lg:-ml-36 pt-20 lg:pt-16 gap-4 p-4'>
+      <div className='w-full overflow-y-auto lg:-ml-36 pt-20 lg:pt-16 gap-4 md:p-4'>
         {
           posts.map((element, index) => {
             return (
@@ -25,7 +25,7 @@ export default async function Home() {
             )
           })
         }
-        <div className='h-32 bg-gray-50 w-full flex justify-center items-center'>
+        <div className='h-32 bg-gray-50 w-full flex justify-center items-center mb-10 lg:mb-0'>
           Made with 💖 by Peeyush.
         </div>
       </div>
