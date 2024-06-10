@@ -3,7 +3,7 @@
 import LoadingChat from "@/components/LoadingChat";
 import MessageAi from "@/components/message-ai";
 import MessageUser from "@/components/message-user";
-import { useOurStore } from "@/state-store/Store";
+import { useOurStore } from "@/store/states";
 import { useEffect, useRef } from "react";
 
 

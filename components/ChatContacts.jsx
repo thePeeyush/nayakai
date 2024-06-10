@@ -2,7 +2,7 @@
 
 import React from 'react'
 import PeerCard from "./PeerCard";
-import { useOurStore } from '@/state-store/Store';
+import { useOurStore } from '@/store/states';
 
 
 const ChatContacts = () => {

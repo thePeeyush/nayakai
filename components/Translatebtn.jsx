@@ -1,5 +1,5 @@
 'use client'
-import { useOurStore } from '@/state-store/Store';
+import { useOurStore } from "@/store/states";
 import { BsTranslate, BsChevronDown } from 'react-icons/bs';
 
 

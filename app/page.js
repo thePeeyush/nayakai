@@ -2,12 +2,13 @@ import Card from '@/components/cards'
 import Image from 'next/image'
 import getUrl from '../utils/getUrl';
 import { Suspense } from 'react';
+import { unstable_noStore as noStore } from 'next/cache';
 
 export default async function Home() {
   const fetchPosts = async () => {
     try {
       const url = `${getUrl()}/api/content`
-      const res = await fetch(url, { method: 'GET', cache: 'no-store' });
+      const res = await fetch(url, { method: 'GET'});
       const posts = (await res.json()).result
       return posts
     } catch (error) {
@@ -17,7 +18,7 @@ export default async function Home() {
   const posts = await fetchPosts()
   return (
     <Suspense fallback={<Loading />}>
-      <div className='w-full overflow-y-auto lg:-ml-36 pt-20 lg:pt-16 gap-4 md:p-4'>
+      <div className='w-full overflow-y-auto lg:-ml-36 pt-20 lg:pt-16 gap-4 sm:p-4'>
         {
           posts.map((element, index) => {
             return (

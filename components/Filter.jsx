@@ -1,4 +1,4 @@
-import { useOurStore } from '@/state-store/Store';
+import { useOurStore } from '@/store/states';
 import React from 'react'
 import { VscSettings } from "react-icons/vsc";
 

@@ -3,7 +3,7 @@
 import { BsMic } from 'react-icons/bs';
 import { BiSend } from 'react-icons/bi';
 import { useState } from 'react';
-import { useOurStore } from '@/state-store/Store';
+import { useOurStore } from '@/store/states';
 import { RiChatNewLine } from 'react-icons/ri';
 
 

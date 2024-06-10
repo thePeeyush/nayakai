@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import React from 'react'
-import { useOurStore } from '@/state-store/Store'
+import { useOurStore } from '@/store/states';
 
 const PeerCard = () => {
   const setChatContactDisplay = useOurStore(s=>s.setChatContactDisplay)

@@ -43,6 +43,11 @@ export async function GET() {
     const sig = signuploadform();
     const cloudName = process.env.CLOUDINARY_CLOUD_NAME;
     const apiKey = process.env.CLOUDINARY_API_KEY;
+    const session = await auth();
+    console.log(session)
+    if (!session) {
+        return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+    }
   try {
     const result = {
     signature: sig.signature,

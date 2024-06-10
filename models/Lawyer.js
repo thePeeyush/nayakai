@@ -42,7 +42,6 @@ const lawyerSchema = new Schema({
     }
 });
 
-
 const Lawyer =  models.Lawyer || model("Lawyer",lawyerSchema);
 export default Lawyer;
 

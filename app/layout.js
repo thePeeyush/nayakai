@@ -2,7 +2,6 @@ import "./globals.css";
 import { Noto_Sans } from "next/font/google";
 import Nav from "@/components/nav";
 import Header from "@/components/header";
-import { SessionProvider } from "next-auth/react";
 import { auth } from "@/auth";
 import SessionWrapper from "../components/sessionWrapper";
 

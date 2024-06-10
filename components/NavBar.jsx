@@ -3,10 +3,10 @@
 import React from 'react'
 import { BsChevronLeft } from 'react-icons/bs';
 import { usePathname } from 'next/navigation';
-import Link from 'next/link';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import {useOurStore} from '../state-store/Store'
+import { useOurStore } from "@/store/states";
+
 
 
 const NavBar = ({children}) => {
