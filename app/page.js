@@ -8,7 +8,7 @@ export default async function Home() {
   const fetchPosts = async () => {
     try {
       const url = `${getUrl()}/api/content`
-      const res = await fetch(url, { method: 'GET'});
+      const res = await fetch(url, { method: 'GET', cache: "no-store"});
       const posts = (await res.json()).result
       return posts
     } catch (error) {
