@@ -1,15 +1,12 @@
 import {model,Schema,models} from "mongoose";
 const postSchema = new Schema({
-    postID : {
-        type: String,
-        required: true
-    },
     content: {
         type: String,
         required: true
     },
     author: {
-        type: String,
+        type: Schema.Types.ObjectId,
+        ref:"Profile",
         required: true
     },
     date: {

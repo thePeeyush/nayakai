@@ -2,6 +2,7 @@ import NavBar from './NavBar';
 import AccountBar from './AccountBar';
 import Link from 'next/link';
 import { IoCreateOutline } from "react-icons/io5";
+import ModalForPost from './ModalForPost';
 
 export default function Header() {
   return (
@@ -16,12 +17,13 @@ export default function Header() {
         </div>
         <div className='w-1/4'>
           <div className="flex gap-2 items-center justify-end pr-4">
-            <Link href="/post">
+            {/* <Link href="/post">
               <div className="flex">
               <IoCreateOutline className='text-2xl'/>
               <h1 className='hidden md:block pt-[2px]'>Post</h1>
               </div>
-            </Link>
+            </Link> */}
+            <ModalForPost/>
           </div>
         </div>
       </header>

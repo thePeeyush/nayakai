@@ -1,5 +1,5 @@
 export default async function uploadMedia(file) {
-    const response = await fetch('/api/post',{method: 'GET'});
+    const response = await fetch('/api/createPost',{method: 'GET'});
         const body = await response.json();
         const signData = body.result;
         const url = "https://api.cloudinary.com/v1_1/" + signData.cloudname + "/auto/upload";

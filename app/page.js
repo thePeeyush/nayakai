@@ -2,7 +2,8 @@ import Card from '@/components/cards'
 import Image from 'next/image'
 import getUrl from '../utils/getUrl';
 import { Suspense } from 'react';
-import { unstable_noStore as noStore } from 'next/cache';
+import Post from '../components/Post';
+import SkeletonCard from '../components/SkeletonCard';
 
 export default async function Home() {
   const fetchPosts = async () => {
@@ -22,7 +23,7 @@ export default async function Home() {
         {
           posts.map((element, index) => {
             return (
-              <Card key={index} post={element} />
+              <Post key={index} postID={element._id}/>
             )
           })
         }
@@ -36,6 +37,17 @@ export default async function Home() {
 
 function Loading() {
   return (
-    <h1 className="mt-20 ml-40">🌀Loading...</h1>
+    <div className='flex flex-col items-center w-full p-2 mt-16 gap-4' >
+    <SkeletonCard/>
+    <SkeletonCard/>
+    <SkeletonCard/>
+    <SkeletonCard/>
+    <SkeletonCard/>
+    <SkeletonCard/>
+    <SkeletonCard/>
+    <SkeletonCard/>
+    <SkeletonCard/>
+    <SkeletonCard/>
+    </div>
   )
 }

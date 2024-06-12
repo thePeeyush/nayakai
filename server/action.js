@@ -1,11 +1,13 @@
 'use server'
 import connectDB from '../utils/db'
+import Post from '../models/Post'
 
 export async function likePost (postID) {
     try {
-        const db = await connectDB();
-        const result = await db.collection('posts').updateOne({ _id: postID }, { $inc: { likes: 1 } })
+        await connectDB();
+        const result = await Post.updateOne({ _id: postID }, { $inc: { likes: 1 } })
         console.log('result', result);
+        if(result.modifiedCount === 0) return false;
         return true
     } catch (error) {
         console.log('ERROR while increment the upvote',error);
@@ -15,9 +17,10 @@ export async function likePost (postID) {
 
 export async function unlikePost (postID) {
     try {
-        const db = await connectDB();
-        const result = await db.collection('posts').updateOne({ _id: postID }, { $inc: { likes: -1 } })
+        await connectDB();
+        const result = await Post.updateOne({ _id: postID }, { $inc: { likes: -1 } })
         console.log('result', result);
+        if(result.modifiedCount === 0) return false;
         return true
     } catch (error) {
         console.log('ERROR while decrement the upvote',error);
@@ -27,9 +30,10 @@ export async function unlikePost (postID) {
 
 export async function dislikePost (postID) {
     try {
-        const db = await connectDB();
-        const result = await db.collection('posts').updateOne({ _id: postID }, { $inc: { dislikes: 1 } })
+        await connectDB();
+        const result = await Post.updateOne({ _id: postID }, { $inc: { dislikes: 1 } })
         console.log('result', result);
+        if(result.modifiedCount === 0) return false;
         return true
     } catch (error) {
         console.log('ERROR while increment the downvote',error);
@@ -39,9 +43,10 @@ export async function dislikePost (postID) {
 
 export async function undislikePost (postID) {
     try {
-        const db = await connectDB();
-        const result = await db.collection('posts').updateOne({ _id: postID }, { $inc: { dislikes: -1 } })
+        await connectDB();
+        const result = Post.updateOne({ _id: postID }, { $inc: { dislikes: -1 } })
         console.log('result', result);
+        if(result.modifiedCount === 0) return false;
         return true
     } catch (error) {
         console.log('ERROR while decrement the upvote',error);

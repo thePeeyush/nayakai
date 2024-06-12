@@ -9,7 +9,7 @@ export async function GET() {
         await connectDB();
         console.log('✅:::::::::connected')
         unstable_noStore();
-        const result = await Post.find({}).sort({date: -1});
+        const result = await Post.find({},'_id').sort({date: -1});
         return NextResponse.json({ message: "OK", result }, { status: 200 });
     } catch (error) {
         return NextResponse.json({ message: "Error", error }, { status: 500 });

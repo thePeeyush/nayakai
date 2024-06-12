@@ -1,4 +1,3 @@
-import { ObjectId } from "mongodb";
 import { Schema, model, models } from "mongoose";
 
 const profileSchema = new Schema({
@@ -11,6 +10,12 @@ const profileSchema = new Schema({
         maxlength: 50,
         required: true,
         unique : true,
+    },
+    name: {
+        type: String,
+        maxlength: 50,
+        required: true,
+        default: "my name"
     },
     bio: {
         type: String,
