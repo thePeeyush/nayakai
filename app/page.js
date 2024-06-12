@@ -1,5 +1,3 @@
-import Card from '@/components/cards'
-import Image from 'next/image'
 import getUrl from '../utils/getUrl';
 import { Suspense } from 'react';
 import Post from '../components/Post';

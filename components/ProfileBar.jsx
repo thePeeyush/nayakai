@@ -20,15 +20,6 @@ const Info = ({label, value, onClick, status}) => {
     )
 }
 
-const Posts = ({posts}) => {
-  posts.map((element, index) => {
-    return (
-      <div key={index}>
-        <Card post={element} />
-      </div>
-    )
-  })
-}
 
 
 
