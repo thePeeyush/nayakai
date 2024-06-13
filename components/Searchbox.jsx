@@ -28,7 +28,7 @@ const Searchbox = ({ text }) => {
 
   return (
     <div className="flex items-center gap-2">
-      <div className='flex flex-row w-full items-center justify-end max-w-sm rounded-full border py-2 px-3 my-4'>
+      <div className='flex flex-row w-full items-center justify-end md:max-w-sm rounded-full border py-2 px-3 my-4'>
         <BiSearch onClick={(e) => handleClick(e)} className='text-2xl cursor-pointer' />
         <input 
           ref={inputRef}

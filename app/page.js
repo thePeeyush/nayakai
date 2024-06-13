@@ -7,7 +7,7 @@ export default async function Home() {
   const fetchPosts = async () => {
     try {
       const url = `${getUrl()}/api/content`
-      const res = await fetch(url, { method: 'GET', cache: "no-store"});
+      const res = await fetch(url, { method: 'GET', cache: "no-store" });
       const posts = (await res.json()).result
       return posts
     } catch (error) {
@@ -15,13 +15,24 @@ export default async function Home() {
     }
   }
   const posts = await fetchPosts()
+  if (!posts) {
+    return (
+      <div className="w-full absolute">
+        <div className='flex flex-col items-center w-full p-2 pt-16 gap-8 max-w-xl mx-auto overflow-y-scroll' >
+          <SkeletonCard />
+          <SkeletonCard />
+          <SkeletonCard />
+        </div>
+      </div>
+    )
+  }
   return (
     <Suspense fallback={<Loading />}>
       <div className='w-full overflow-y-auto lg:-ml-36 pt-20 lg:pt-16 gap-4 sm:p-4'>
         {
           posts.map((element, index) => {
             return (
-              <Post key={index} postID={element._id}/>
+              <Post key={index} postID={element._id} />
             )
           })
         }
@@ -35,17 +46,12 @@ export default async function Home() {
 
 function Loading() {
   return (
-    <div className='flex flex-col items-center w-full p-2 mt-16 gap-4' >
-    <SkeletonCard/>
-    <SkeletonCard/>
-    <SkeletonCard/>
-    <SkeletonCard/>
-    <SkeletonCard/>
-    <SkeletonCard/>
-    <SkeletonCard/>
-    <SkeletonCard/>
-    <SkeletonCard/>
-    <SkeletonCard/>
+    <div className="w-full absolute">
+      <div className='flex flex-col items-center w-full p-2 mt-16 gap-4 max-w-xl mx-auto' >
+        <SkeletonCard />
+        <SkeletonCard />
+        <SkeletonCard />
+      </div>
     </div>
   )
 }

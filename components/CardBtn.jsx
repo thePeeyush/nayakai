@@ -1,8 +1,8 @@
 'use client'
 import React from 'react'
 
-const CardBtn = ({ children, title, color, bgColor, onClick, postID }) => {
-    return <button className={`flex justify-center items-center gap-1 rounded-full p-2 m-2 w-full ${color} ${bgColor} hover:bg-opacity-10`} onClick={()=>onClick(postID)} >
+const CardBtn = ({ children, title, color, bgColor,onClick}) => {
+    return <button className={`flex justify-center items-center gap-1 rounded-full p-2 m-2 w-full ${color} ${bgColor} hover:bg-opacity-10`} onClick={onClick} >
       <div className="text-xl">
         {children}
       </div>
