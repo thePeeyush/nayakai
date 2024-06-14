@@ -16,33 +16,33 @@ import CardBtn from "./CardBtn";
 import calculateTime from "../utils/calculateTime";
 import getUrl from "../utils/getUrl";
 
-const PostComponent = ({ postID }) => {
-    const [post, setPost] = useState(null);
-    const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState(null);
+const PostCard = ({ post }) => {
+    // const [post, setPost] = useState(post);
+    // const [isLoading, setIsLoading] = useState(true);
+    // const [error, setError] = useState(null);
     const [isLiked, setIsLiked] = useState(false);
     const [isDisliked, setIsDisliked] = useState(false);
     const [likeCount, setLikeCount] = useState(0);
     const [dislikeCount, setDislikeCount] = useState(0);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                setIsLoading(true);
-                const res = await fetch(`${getUrl()}/api/post?id=${postID}`);
-                if (!res.ok) {
-                    throw new Error("Failed to fetch post");
-                }
-                const data = await res.json();
-                setPost(data.result);
-                setIsLoading(false);
-            } catch (error) {
-                setError(error);
-                setIsLoading(false);
-            }
-        };
-        fetchData();
-    }, [postID]);
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //         try {
+    //             setIsLoading(true);
+    //             const res = await fetch(`${getUrl()}/api/post?id=${postID}`);
+    //             if (!res.ok) {
+    //                 throw new Error("Failed to fetch post");
+    //             }
+    //             const data = await res.json();
+    //             setPost(data.result);
+    //             setIsLoading(false);
+    //         } catch (error) {
+    //             setError(error);
+    //             setIsLoading(false);
+    //         }
+    //     };
+    //     fetchData();
+    // }, [postID]);
 
     useEffect(() => {
         if (post) {
@@ -109,10 +109,10 @@ const PostComponent = ({ postID }) => {
         setIsDisliked(false);
     };
 
-    if (error) return <div>Error: {error.message}</div>;
-    if (isLoading) return <SkeletonCard />;
+    // if (error) return <div>Error: {error.message}</div>;
+    // if (isLoading) return <SkeletonCard />;
 
-    const { content, media, comments, views, date } = post;
+    const { content, media, comments, views, date,_id: postID } = post;
     return (
         <div className="flex flex-col w-full max-w-lg items-center border border-t-0 mx-auto px-2">
             <div className="flex justify-start w-full py-2 gap-2">
@@ -198,4 +198,4 @@ const PostComponent = ({ postID }) => {
     );
 };
 
-export default PostComponent;
+export default PostCard;
