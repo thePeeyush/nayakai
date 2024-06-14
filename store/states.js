@@ -17,5 +17,8 @@ export const useOurStore = create(
         chatContactDisplay:true,
         setChatContactDisplay: (bool)=>set(()=>({chatContactDisplay:bool})),
 
+        lock:false,
+        setLock: (bool)=>set(()=>({lock:bool})),
+
     })
 )
