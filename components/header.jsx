@@ -6,7 +6,7 @@ import ModalForPost from './ModalForPost';
 
 export default function Header() {
   return (
-    <header className=' fixed top-0 w-full flex flex-row justify-between items-center p-1 px-4 lg:border-b border-gray-200 bg-white bg-opacity-40 backdrop-blur-md z-30 '>
+    <header className=' fixed top-0 w-full flex flex-row justify-between items-center p-1 px-4 lg:border-b border-gray-200 bg-white bg-opacity-40 backdrop-blur-md z-30 min-h-16'>
         <div className='w-1/4 '>
         <NavBar>
           <AccountBar/>

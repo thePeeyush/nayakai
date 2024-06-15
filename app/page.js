@@ -7,7 +7,7 @@ import { useState } from "react";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 
-export default function Home() { 
+export default function Home() {
   const [posts, setPosts] = useState([]);
   const [page, setPage] = useState(0);
   const loaderRef = useRef(null);
@@ -33,23 +33,21 @@ export default function Home() {
   };
 
   return (
-    <div className="w-full overflow-y-auto lg:-ml-36 pt-20 lg:pt-16 gap-4 sm:p-4">
+    <div className="w-full overflow-y-auto lg:-ml-36 pt-20 lg:pt-16 gap-4 overflow-hidden">
       {posts.length > 0 &&
         posts.map((element, index) => {
           return <Post key={index} post={element} />;
         })}
-      <span
-        ref={loaderRef}
-        className="h-[1px] w-full"
-      ></span>
-      <Loading />
+      <div ref={loaderRef} className="w-full">
+        <Loading />
+      </div>
     </div>
   );
 }
 
 function Loading() {
   return (
-    <div className="flex flex-col items-center w-full p-2 gap-4 max-w-xl mx-auto">
+    <div className="flex flex-col items-center w-full gap-4 max-w-lg mx-auto">
       <SkeletonCard />
       <SkeletonCard />
       <SkeletonCard />

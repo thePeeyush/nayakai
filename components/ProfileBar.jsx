@@ -3,7 +3,7 @@ import React from 'react'
 const ProfileBar = ({profile}) => {
     const [status, setStatus] = React.useState('Posts');
   return (
-    <div className="flex w-full border rounded-lg">
+    <div className="flex w-full border">
           <Info status={status} onClick={()=>setStatus('Posts')} label="Posts" value={profile?.posts?.length} />
           <Info status={status} onClick={()=>setStatus('Followers')} label="Followers" value={profile?.followers?.length} />
           <Info status={status} onClick={()=>setStatus('Following')} label="Following" value={profile?.following?.length} />

@@ -1,7 +1,6 @@
 "use client";
 import { useEffect } from "react";
 import { useState } from "react";
-import SkeletonCard from "./SkeletonCard";
 import { CiChat1, CiShare1, CiTimer } from "react-icons/ci";
 import { PiTriangleFill, PiTriangleThin } from "react-icons/pi";
 import { PiLineSegmentsThin } from "react-icons/pi";
@@ -11,38 +10,17 @@ import {
     likePost,
     unlikePost,
     undislikePost,
-} from "../server/action";
-import CardBtn from "./CardBtn";
-import calculateTime from "../utils/calculateTime";
-import getUrl from "../utils/getUrl";
-
+    } from "../server/action";
+    import CardBtn from "./CardBtn";
+    import calculateTime from "../utils/calculateTime";
+    
 const PostCard = ({ post }) => {
-    // const [post, setPost] = useState(post);
-    // const [isLoading, setIsLoading] = useState(true);
-    // const [error, setError] = useState(null);
+    const { content, media, comments, views, date,_id: postID } = post;
+    const { userName:authorUserName, name:authorName, profilePic:authorProfilePic} = post.authorDetails;
     const [isLiked, setIsLiked] = useState(false);
     const [isDisliked, setIsDisliked] = useState(false);
     const [likeCount, setLikeCount] = useState(0);
     const [dislikeCount, setDislikeCount] = useState(0);
-
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //         try {
-    //             setIsLoading(true);
-    //             const res = await fetch(`${getUrl()}/api/post?id=${postID}`);
-    //             if (!res.ok) {
-    //                 throw new Error("Failed to fetch post");
-    //             }
-    //             const data = await res.json();
-    //             setPost(data.result);
-    //             setIsLoading(false);
-    //         } catch (error) {
-    //             setError(error);
-    //             setIsLoading(false);
-    //         }
-    //     };
-    //     fetchData();
-    // }, [postID]);
 
     useEffect(() => {
         if (post) {
@@ -109,23 +87,24 @@ const PostCard = ({ post }) => {
         setIsDisliked(false);
     };
 
-    // if (error) return <div>Error: {error.message}</div>;
-    // if (isLoading) return <SkeletonCard />;
-
-    const { content, media, comments, views, date,_id: postID } = post;
     return (
-        <div className="flex flex-col w-full max-w-lg items-center border border-t-0 mx-auto px-2">
+        <div className="flex flex-col w-full max-w-lg items-center border-b mx-auto p-2">
             <div className="flex justify-start w-full py-2 gap-2">
                 <img
                     className=" min-w-10 w-10 h-10 rounded-full"
-                    src="https://img.daisyui.com/images/stock/photo-1559703248-dcaaec9fab78.jpg"
-                    alt="Tailwind CSS Illustration"
+                    src={authorProfilePic}
+                    alt="author Image"
                 />
                 <div className="flex flex-col">
                     <div className="flex items-center gap-2">
-                        <h1 className=" font-semibold">Peeyush</h1>
-                        <CiTimer />
-                        <h1 className=" text-sm opacity-80">{calculateTime(date)} ago</h1>
+                        <h1 className=" font-semibold  text-sm md:text-base truncate max-w-32 md:max-w-52" style={{ WebkitLineClamp: 1 }}>
+                            {authorName}
+                        </h1>
+                        <p className=" text-xs md:text-sm opacity-80">@{authorUserName}</p>
+                        <div className="flex items-center">
+                        <CiTimer className="text-xs md:text-sm opacity-80" />
+                        <h1 className=" text-xs md:text-sm opacity-80">{calculateTime(date)}</h1>
+                        </div>
                     </div>
                     <h1 className="">{content}</h1>
                 </div>
@@ -178,13 +157,6 @@ const PostCard = ({ post }) => {
                     title={comments.length}
                 >
                     <CiChat1 />{" "}
-                </CardBtn>
-                <CardBtn
-                    color={"hover:text-yellow-500"}
-                    bgColor={"hover:bg-yellow-500"}
-                    title={views}
-                >
-                    <PiLineSegmentsThin />{" "}
                 </CardBtn>
                 <CardBtn
                     color={"hover:text-pink-500"}

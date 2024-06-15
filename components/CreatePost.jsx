@@ -3,6 +3,9 @@ import React from 'react';
 import { useState } from 'react';
 import { BiImageAdd } from 'react-icons/bi';
 import uploadMedia from '../utils/uploadMedia';
+import Link from 'next/link';
+import getUrl from '../utils/getUrl';
+import { toggleCreatePostModal } from './ModalForPost';
 
 const CreatePost = () => {
     const [text, setText] = useState("");
@@ -12,6 +15,7 @@ const CreatePost = () => {
     const [tags, setTags] = useState([]);
     const [unploading, setUnploading] = useState(false);
     const [posting, setPosting] = useState(false);
+    const [haveProfile, setHaveProfile] = useState(true);
 
     const addTags = (e) => {
         setTags([...tags, e.target.value]);
@@ -28,7 +32,6 @@ const CreatePost = () => {
         if (text === "" && media.length === 0) {
             return;
         }
-        setSubmit(true);
         try {
             const res = await fetch('/api/createPost', {
                 method: 'POST',
@@ -40,6 +43,12 @@ const CreatePost = () => {
                     media: media,
                 }),
             });
+            if(res.status === 201) {
+                setSubmit(true);
+            }
+            if(res.status === 404) {
+                setHaveProfile(false);
+            }
             if (!res.ok) {
                 throw new Error(`Something went wrong: ${res.status}`);
             }
@@ -58,6 +67,14 @@ const CreatePost = () => {
         setUnploading(false);
     }
 
+    if(!haveProfile) {
+        return (
+            <div className="w-full h-full flex justify-center items-center">
+                <p className="text-lg">You need to create a profile first </p>
+                <Link href={`${getUrl()}/profile/create`} onClick={toggleCreatePostModal} className='btn mx-2' >Create Profile</Link>
+            </div>
+        )
+    }
     if (submit) {
         return (
             <div className="w-full h-full flex justify-center items-center">

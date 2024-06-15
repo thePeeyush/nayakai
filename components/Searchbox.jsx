@@ -28,7 +28,7 @@ const Searchbox = ({ text }) => {
 
   return (
     <div className="flex items-center gap-2">
-      <div className='flex flex-row w-full items-center justify-end md:max-w-sm rounded-full border py-2 px-3 my-4'>
+      <div className='flex flex-row w-full items-center justify-end md:max-w-[810px] lg:max-w-md rounded-full border py-2 px-3 my-4'>
         <BiSearch onClick={(e) => handleClick(e)} className='text-2xl cursor-pointer' />
         <input 
           ref={inputRef}
@@ -40,7 +40,7 @@ const Searchbox = ({ text }) => {
           className=' text-left w-full pl-3 outline-none' />
         <RxCrossCircled onClick={()=>{setInputText('')}} className={searchText?'block text-xl cursor-pointer':'hidden'}/>
       </div>
-      <Filter />
+      {/* <Filter /> */}
     </div>
   )
 }
