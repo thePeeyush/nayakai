@@ -1,59 +1,65 @@
-import {model,Schema,models} from "mongoose";
+import { model, Schema, models } from "mongoose";
 const postSchema = new Schema({
     content: {
         type: String,
-        required: true
+        required: true,
     },
     author: {
         type: Schema.Types.ObjectId,
-        ref:"Profile",
-        required: true
-    },
-    date: {
-        type: Date,
+        ref: "Profile",
         required: true,
-        default:Date.now,
     },
-    media:{
-        type: [{
-            url: {
-                type: String,
-                required: true
+    media: {
+        type: [
+            {
+                url: {
+                    type: String,
+                    required: true,
+                },
+                filetype: {
+                    type: String,
+                    required: true,
+                },
             },
-            filetype: {
-                type: String,
-                required: true
-            }
-        }],
-        default: []
+        ],
+        default: [],
     },
     tags: {
         type: [String],
     },
-    comments: { 
-        type: [{
-            type:Schema.Types.ObjectId,
-            ref:"Comment"
-        }],
+    comments: {
+        type: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: "Post",
+            },
+        ],
         required: true,
-        default: []
+        default: [],
     },
-    likes: {    
+    likes: {
         type: Number,
         required: true,
-        default: 0
+        default: 0,
     },
-    dislikes: {     
-        type: Number,  
-        required: true,
-        default: 0
-    },
-    views: {     
+    dislikes: {
         type: Number,
         required: true,
-        default: 0
+        default: 0,
+    },
+    views: {
+        type: Number,
+        required: true,
+        default: 0,
+    },
+    level : {
+        type: Number,
+        required: true,
+        default:0,
     }
-});
+},
+{timestamps: true}
+);
 
-const Post =  models.Post || model("Post",postSchema);
+const Post = models.Post || model("Post", postSchema);
 export default Post;

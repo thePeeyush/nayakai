@@ -2,6 +2,7 @@ import "./globals.css";
 import { Noto_Sans } from "next/font/google";
 import Nav from "@/components/nav";
 import Header from "@/components/header";
+import ModalForPost from "../components/ModalForPost";
 
 const ourFont = Noto_Sans({
   subsets: ["latin"],
@@ -21,6 +22,7 @@ export default function RootLayout({ children }) {
         <hgroup className=" flex flex-row h-screen w-screen overflow-hidden">
           <Nav />
             {children}
+          <ModalForPost />
         </hgroup>
       </body>
     </html>

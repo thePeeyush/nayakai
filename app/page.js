@@ -1,6 +1,6 @@
 "use client";
 import getUrl from "../utils/getUrl";
-import Post from "../components/PostCard";
+import PostCard from "../components/PostCard";
 import SkeletonCard from "../components/SkeletonCard";
 import { useEffect } from "react";
 import { useState } from "react";
@@ -28,7 +28,7 @@ export default function Home() {
       setPage((prevPage) => prevPage + 1);
       setPosts((prevPosts) => [...prevPosts, ...posts]);
     } catch (error) {
-      setError(error);
+      console.log(error);
     }
   };
 
@@ -36,7 +36,7 @@ export default function Home() {
     <div className="w-full overflow-y-auto lg:-ml-36 pt-20 lg:pt-16 gap-4 overflow-hidden">
       {posts.length > 0 &&
         posts.map((element, index) => {
-          return <Post key={index} post={element} />;
+          return <PostCard key={index} post={element} />;
         })}
       <div ref={loaderRef} className="w-full">
         <Loading />

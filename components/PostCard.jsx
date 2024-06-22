@@ -3,24 +3,29 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { CiChat1, CiShare1, CiTimer } from "react-icons/ci";
 import { PiTriangleFill, PiTriangleThin } from "react-icons/pi";
-import { PiLineSegmentsThin } from "react-icons/pi";
 import VedioPlayer from "./VedioPlayer";
 import {
     dislikePost,
     likePost,
     unlikePost,
     undislikePost,
-    } from "../server/action";
-    import CardBtn from "./CardBtn";
-    import calculateTime from "../utils/calculateTime";
-    
-const PostCard = ({ post }) => {
-    const { content, media, comments, views, date,_id: postID } = post;
-    const { userName:authorUserName, name:authorName, profilePic:authorProfilePic} = post.authorDetails;
+} from "../server/action";
+import CardBtn from "./CardBtn";
+import calculateTime from "../utils/calculateTime";
+import { useOurStore } from "../store/states";
+import { toggleCreatePostModal } from "./ModalForPost";
+import getUrl from "../utils/getUrl";
+import Link from "next/link";
+
+const PostCard = ({ post, large }) => {
+    const { content, media, comments, views, createdAt: date, _id: postID, level } = post;
+    const { name: authorName, profilePic: authorProfilePic, userName: authorUserName, _id: authorID } = post.author;
     const [isLiked, setIsLiked] = useState(false);
     const [isDisliked, setIsDisliked] = useState(false);
     const [likeCount, setLikeCount] = useState(0);
     const [dislikeCount, setDislikeCount] = useState(0);
+    const setPost = useOurStore((state) => state.setPost);
+    const newPost = useOurStore((state) => state.post);
 
     useEffect(() => {
         if (post) {
@@ -87,8 +92,22 @@ const PostCard = ({ post }) => {
         setIsDisliked(false);
     };
 
+    const handleComment = async () => {
+        const postData = {
+            postID,
+            level,
+            content,
+            date,
+            authorName,
+            authorProfilePic,
+            authorUserName,
+        }
+        setPost({ ...newPost, postToComment: postData });
+        toggleCreatePostModal();
+    };
+
     return (
-        <div className="flex flex-col w-full max-w-lg items-center border-b mx-auto p-2">
+        <div className={`flex flex-col w-full ${large ? "px-4 border-b-0 border-r h-full" : "max-w-lg"} items-center border-b mx-auto p-2`} >
             <div className="flex justify-start w-full py-2 gap-2">
                 <img
                     className=" min-w-10 w-10 h-10 rounded-full"
@@ -102,15 +121,17 @@ const PostCard = ({ post }) => {
                         </h1>
                         <p className=" text-xs md:text-sm opacity-80">@{authorUserName}</p>
                         <div className="flex items-center">
-                        <CiTimer className="text-xs md:text-sm opacity-80" />
-                        <h1 className=" text-xs md:text-sm opacity-80">{calculateTime(date)}</h1>
+                            <CiTimer className="text-xs md:text-sm opacity-80" />
+                            <h1 className=" text-xs md:text-sm opacity-80">{calculateTime(date)}</h1>
                         </div>
                     </div>
-                    <h1 className="">{content}</h1>
+                    <Link href={`${getUrl()}/post?post=${postID}`}>
+                        <h1 className="">{content}</h1>
+                    </Link>
                 </div>
             </div>
 
-            <div className="outline-dashed outline-1 outline-gray-100 carousel carousel-center rounded-md max-h-[500px] relative">
+            <div className="outline-dashed outline-1 outline-gray-100 carousel carousel-center rounded-md w-full max-h-[100vh] relative">
                 {media.map((item, index) => {
                     return (
                         <div key={index} className="carousel-item w-full relative">
@@ -152,6 +173,7 @@ const PostCard = ({ post }) => {
                     {isDisliked ? <PiTriangleFill className="rotate-180" /> : <PiTriangleThin className="rotate-180" />}{" "}
                 </CardBtn>
                 <CardBtn
+                    onClick={handleComment}
                     color={"hover:text-blue-500"}
                     bgColor={"hover:bg-blue-500"}
                     title={comments.length}

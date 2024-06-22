@@ -17,5 +17,18 @@ export const useOurStore = create(
         chatContactDisplay:true,
         setChatContactDisplay: (bool)=>set(()=>({chatContactDisplay:bool})),
 
+        post: {
+            text:"",
+            media:[],
+            preview:[],
+            tags:[],
+            uploading:false,
+            posting:false,
+            haveProfile:true,
+            postToComment: {},
+        },
+        setPost: (post)=>set(()=>({post:post})),
+        resetPost: ()=>set(()=>({post:{text:"",media:[],preview:[],tags:[],uploading:false,posting:false,haveProfile:true,postToComment: {}}})),
+
     })
 )

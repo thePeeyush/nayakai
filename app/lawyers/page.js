@@ -11,8 +11,6 @@ async function getLawyers(searchParams) {
   if (searchParams.search) {
     url = `${curUrl}/api/lawyers?search=${searchParams.search}`
   } else url = `${curUrl}/api/lawyers/`
-
-  // artificial delay
   const res = await fetch(url, { cache: "no-store" });
   return res.json();
 }

@@ -35,15 +35,38 @@ const profileSchema = new Schema({
         }],
         required: true,
     },
-    followers: [Schema.Types.ObjectId],
-    following: [Schema.Types.ObjectId],
-    likes: [Schema.Types.ObjectId],
-    dislikes: [Schema.Types.ObjectId],
-    comments: [Schema.Types.ObjectId],
-    date: {
-        type: Date,
+    comments: {
+        type: [{
+            type: Schema.Types.ObjectId,
+            ref: "Post"
+        }],
         required: true,
-        default: Date.now,
+    },
+    followers: {
+        type: [{
+            type: Schema.Types.ObjectId,
+            ref: "Profile"
+        }],
+        required: true,
+    },
+    following: {
+        type: [{
+            type: Schema.Types.ObjectId,
+            ref: "Profile"
+        }],
+        required: true,
+    },
+    likes: {
+        type: [Schema.Types.ObjectId],
+        required: true,
+    },
+    dislikes: {
+        type: [Schema.Types.ObjectId],
+        required: true,
+    },
+    notifications: {
+        type: [Schema.Types.ObjectId],
+        required: true,
     },
     specific_role: {
         type: {
@@ -59,7 +82,9 @@ const profileSchema = new Schema({
         },
         default: null
     },
-});
+},
+{timestamps: true}
+);
 
 const Profile =  models.Profile || model("Profile",profileSchema);
 export default Profile
