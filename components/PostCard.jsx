@@ -4,53 +4,54 @@ import { useState } from "react";
 import { CiChat1, CiShare1, CiTimer } from "react-icons/ci";
 import { PiTriangleFill, PiTriangleThin } from "react-icons/pi";
 import VedioPlayer from "./VedioPlayer";
-import {
-    dislikePost,
-    likePost,
-    unlikePost,
-    undislikePost,
-} from "../server/action";
+import { dislikePost, likePost } from "../server/action";
 import CardBtn from "./CardBtn";
 import calculateTime from "../utils/calculateTime";
 import { useOurStore } from "../store/states";
 import { toggleCreatePostModal } from "./ModalForPost";
 import getUrl from "../utils/getUrl";
 import Link from "next/link";
+import { BsChevronLeft } from "react-icons/bs";
 
 const PostCard = ({ post, large }) => {
-    const { content, media, comments, views, createdAt: date, _id: postID, level } = post;
+    const { content, media, comments, likes, dislikes, views, createdAt: date, _id: postID, level } = post;
     const { name: authorName, profilePic: authorProfilePic, userName: authorUserName, _id: authorID } = post.author;
     const [isLiked, setIsLiked] = useState(false);
     const [isDisliked, setIsDisliked] = useState(false);
     const [likeCount, setLikeCount] = useState(0);
     const [dislikeCount, setDislikeCount] = useState(0);
-    const setPost = useOurStore((state) => state.setPost);
-    const newPost = useOurStore((state) => state.post);
+    const {setPost, setPostToComment , userLikes, userDislikes} = useOurStore((state) => state);
 
     useEffect(() => {
         if (post) {
-            setLikeCount(post.likes);
-            setDislikeCount(post.dislikes);
-            setIsLiked(post.liked);
-            setIsDisliked(post.disliked);
+            setLikeCount(likes);
+            setDislikeCount(dislikes);
+            setIsLiked(userLikes.includes(postID));
+            setIsDisliked(userDislikes.includes(postID));
         }
-    }, [post]);
+        console.log(postID)
+    }, [post, userLikes, userDislikes]);
+
+    
 
     const handleLike = async () => {
         if (isDisliked) {
             setDislikeCount(dislikeCount - 1);
             setIsDisliked(false);
-            const result = await undislikePost(postID);
-            if (!result) {
-                setDislikeCount(dislikeCount + 1);
-                setIsDisliked(true);
-                return;
-            }
-        }
-        if (isLiked) {
+            setLikeCount(likeCount + 1);
+            setIsLiked(true);
+            const result = await likePost(postID);
+            if(result) return;
+            setDislikeCount(dislikeCount + 1);
+            setIsDisliked(true);
             setLikeCount(likeCount - 1);
             setIsLiked(false);
-            const result = await unlikePost(postID);
+            return;
+        } else if (isLiked) {
+            setLikeCount(likeCount - 1);
+            setIsLiked(false);
+            const result = await likePost(postID);
+
             if (result) return;
             setLikeCount(likeCount + 1);
             setIsLiked(true);
@@ -68,18 +69,20 @@ const PostCard = ({ post, large }) => {
         if (isLiked) {
             setLikeCount(likeCount - 1);
             setIsLiked(false);
-            const result = await unlikePost(postID);
-            if (!result) {
-                setLikeCount(likeCount + 1);
-                setIsLiked(true);
-                return;
-            }
-        }
-        if (isDisliked) {
+            setDislikeCount(dislikeCount + 1);
+            setIsDisliked(true);
+            const result = await dislikePost(postID);
+            if(result) return;
+            setLikeCount(likeCount + 1);
+            setIsLiked(true);
             setDislikeCount(dislikeCount - 1);
             setIsDisliked(false);
-            const result = await undislikePost(postID);
-            if (result) return;
+            return;
+        } else if (isDisliked) {
+            setDislikeCount(dislikeCount - 1);
+            setIsDisliked(false);
+            const result = await dislikePost(postID);
+            if(result) return;
             setDislikeCount(dislikeCount + 1);
             setIsDisliked(true);
             return;
@@ -87,7 +90,7 @@ const PostCard = ({ post, large }) => {
         setDislikeCount(dislikeCount + 1);
         setIsDisliked(true);
         const result = await dislikePost(postID);
-        if (result) return;
+        if(result) return;
         setDislikeCount(dislikeCount - 1);
         setIsDisliked(false);
     };
@@ -102,15 +105,17 @@ const PostCard = ({ post, large }) => {
             authorProfilePic,
             authorUserName,
         }
-        setPost({ ...newPost, postToComment: postData });
+        setPostToComment(postData);
         toggleCreatePostModal();
     };
 
     return (
-        <div className={`flex flex-col w-full ${large ? "px-4 border-b-0 border-r h-full" : "max-w-lg"} items-center border-b mx-auto p-2`} >
+        <div className={`flex flex-col w-full ${large ? "px-4 border-b-0 border-r h-full overflow-auto " : "max-w-lg"} items-center border-b mx-auto p-2`} >
             <div className="flex justify-start w-full py-2 gap-2">
+
+                {large && <BsChevronLeft className="text-2xl p-2 mt-[2px] cursor-pointer min-w-10 w-10 h-10 rounded-full hover:bg-gray-200 " onClick={() => window.history.back()} />}
                 <img
-                    className=" min-w-10 w-10 h-10 rounded-full"
+                    className=" min-w-10 w-10 h-10 rounded-full mt-[2px]"
                     src={authorProfilePic}
                     alt="author Image"
                 />
@@ -125,16 +130,20 @@ const PostCard = ({ post, large }) => {
                             <h1 className=" text-xs md:text-sm opacity-80">{calculateTime(date)}</h1>
                         </div>
                     </div>
-                    <Link href={`${getUrl()}/post?post=${postID}`}>
-                        <h1 className="">{content}</h1>
-                    </Link>
+                    <h1 className={`line-clamp-4 ${large ? "line-clamp-none" : ""}`}>
+                        {large ? content : (
+                            <Link href={`${getUrl()}/post?post=${postID}`}>
+                                {content}
+                            </Link>
+                        )}
+                    </h1>
                 </div>
             </div>
 
-            <div className="outline-dashed outline-1 outline-gray-100 carousel carousel-center rounded-md w-full max-h-[100vh] relative">
+            <div className={`carousel carousel-center rounded-md w-full min-w-full h-auto max-h-[70vh] ${large ? "" : ""} relative`}>
                 {media.map((item, index) => {
                     return (
-                        <div key={index} className="carousel-item w-full relative">
+                        <div key={index} className="carousel-item w-full relative min-h-fit">
                             {(item?.filetype.includes("image") || false) && (
                                 <img
                                     className="w-full object-cover"

@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import { auth } from "../../auth";
 import ProfileBar from "../../components/ProfileBar";
 import ProfileSettingModal from "../../components/ProfileSettingModal";
+import PostCard from "../../components/PostCard";
 
 const ProfilePage = async ({ searchParams }) => {
   const session = await auth();
@@ -24,6 +25,7 @@ const ProfilePage = async ({ searchParams }) => {
   }
 
   const profile = await getProfile(searchParams);
+  console.log(profile)
 
   if (!profile) {
     redirect("/profile/create");
@@ -48,6 +50,11 @@ const ProfilePage = async ({ searchParams }) => {
         </div>
         <ProfileSettingModal />
         <ProfileBar profile={profile} />
+        {
+          profile.posts.map((post, index) => {
+            return <PostCard key={index} post={post} />
+          })
+        }
       </div>
     </div>
   );

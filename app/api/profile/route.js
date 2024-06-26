@@ -10,7 +10,14 @@ export async function GET(request) {
         console.log('connecting--------🛠️')
         await connectDB();
         console.log('✅:::::::::connected')
-        const result = await Profile.findOne({ userID });
+        const result = await Profile.findOne({ userID }).populate({
+            path: "posts",
+            options: { limit: 20 },
+            populate: {
+                path: "author",
+                select: "name profilePic userName _id",
+            },
+        });
         return NextResponse.json({ message: "OK", result }, { status: 200 });
     } catch (error) {
         return NextResponse.json({ message: "Error", error }, { status: 500 });

@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import { useState } from 'react'
 import { LuImagePlus } from "react-icons/lu";
 import { useEffect } from 'react'
+import { useOurStore } from '../../../store/states'
 
 const CreateProfile = () => {
 
@@ -31,6 +32,7 @@ const CreateProfile = () => {
     const [data, setData] = useState({});
     const router = useRouter();
     const curUrl = getUrl();
+    const {setHaveProfile} = useOurStore((state) => state);
     
     useEffect(()=>{
         fetchProfile()
@@ -48,6 +50,7 @@ const CreateProfile = () => {
         const result = (await response.json()).result;
         const { userName, name, bio, profilePic } = result;
         setData({userName, name, bio, profilePic});
+        setHaveProfile(true);
     }
 
     const onSubmit = async (data) => {

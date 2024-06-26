@@ -1,11 +1,12 @@
 'use client'
 import React from 'react'
 import CreatePost from './CreatePost'
-import { useOurStore } from '../store/states'
+import { useOurStore } from '../store/states';
 
 
 const ModalForPost = () => {
-    const resetPost = useOurStore((state) => state.resetPost);
+    const { resetPost } = useOurStore((state) => state);
+    
     return (
         <>
             <dialog id="createPostModal" className="modal">

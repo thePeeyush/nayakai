@@ -6,18 +6,24 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
+import { useOurStore } from "../store/states";
 
 export default function Home() {
   const [posts, setPosts] = useState([]);
   const [page, setPage] = useState(0);
   const loaderRef = useRef(null);
   const isInView = useInView(loaderRef);
+  let { setUserLikes, setUserDislikes, setHaveProfile } = useOurStore((state) => state);
 
   useEffect(() => {
     if (isInView) {
       fetchPosts({ page: page + 1 });
     }
   }, [isInView]);
+
+  useEffect(() => {
+    fetchProfile();
+  }, []);
 
   const fetchPosts = async ({ page }) => {
     try {
@@ -30,6 +36,20 @@ export default function Home() {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const fetchProfile = async () => {
+    const url = `${getUrl()}/api/profile/create`;
+    const res = await fetch(url, { method: "GET", cache: "no-store" });
+    const data = (await res.json()).result;
+    console.log(data)
+    if(!data) {
+      setHaveProfile(false);
+      return
+    }
+    setUserLikes([...data.likes]);
+    setUserDislikes([...data.dislikes]);
+    setHaveProfile(true);
   };
 
   return (

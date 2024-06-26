@@ -21,7 +21,6 @@ export async function GET(request) {
           select: "name profilePic userName _id",
         },
       });
-
     return NextResponse.json({ message: "OK", result }, { status: 200 });
   } catch (error) {
     return NextResponse.json({ message: "Error", error }, { status: 500 });
