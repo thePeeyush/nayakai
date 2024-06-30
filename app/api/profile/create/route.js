@@ -43,14 +43,17 @@ export async function PUT(request) {
     if (profile) {
       return NextResponse.json({ message: "UserName already exists" }, { status: 400 });
     }
-    const result = await Profile.findOneAndUpdate({ userID: id }, {
-      $set: { 
+    const result = await Profile.findOneAndUpdate(
+      { userID: id },
+      { $set: { 
         profilePic: body.image,
         bio: body.bio,
-        userName: body.name,
+        userName: body.userName,
         name: body.name
-       }
-    }, { new: true });
+      } },
+      { new: true }
+    );
+    console.log(result)
     return NextResponse.json({ message: "OK", result }, { status: 201 });
   } catch (error) {
     return NextResponse.json({ message: "Error", error }, { status: 500 });

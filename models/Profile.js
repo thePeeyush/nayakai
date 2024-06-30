@@ -68,6 +68,10 @@ const profileSchema = new Schema({
         type: [Schema.Types.ObjectId],
         required: true,
     },
+    saved: {
+        type: [Schema.Types.ObjectId],
+        required: true,
+    },
     specific_role: {
         type: {
             role: {

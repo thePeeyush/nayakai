@@ -43,5 +43,7 @@ export const useOurStore = create(
         userDislikes: [],
         setUserLikes: (likes)=>set(()=>({userLikes:likes})),
         setUserDislikes: (dislikes)=>set(()=>({userDislikes:dislikes})),
+        userProfile: {},
+        setUserProfile: (profile)=>set(()=>({userProfile:profile})),
     })
 )

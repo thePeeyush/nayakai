@@ -21,9 +21,6 @@ export default function Home() {
     }
   }, [isInView]);
 
-  useEffect(() => {
-    fetchProfile();
-  }, []);
 
   const fetchPosts = async ({ page }) => {
     try {
@@ -38,19 +35,7 @@ export default function Home() {
     }
   };
 
-  const fetchProfile = async () => {
-    const url = `${getUrl()}/api/profile/create`;
-    const res = await fetch(url, { method: "GET", cache: "no-store" });
-    const data = (await res.json()).result;
-    console.log(data)
-    if(!data) {
-      setHaveProfile(false);
-      return
-    }
-    setUserLikes([...data.likes]);
-    setUserDislikes([...data.dislikes]);
-    setHaveProfile(true);
-  };
+
 
   return (
     <div className="w-full overflow-y-auto lg:-ml-36 pt-20 lg:pt-16 gap-4 overflow-hidden">

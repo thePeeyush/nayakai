@@ -38,14 +38,24 @@ const postSchema = new Schema({
         default: [],
     },
     likes: {
-        type: Number,
+        type: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: "Profile",
+            },
+        ],
         required: true,
-        default: 0,
+        default: [],
     },
     dislikes: {
-        type: Number,
+        type: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: "Profile",
+            },
+        ],
         required: true,
-        default: 0,
+        default: [],
     },
     views: {
         type: Number,

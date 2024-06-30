@@ -9,10 +9,12 @@ import { toggleCreatePostModal } from './ModalForPost';
 import { useForm } from 'react-hook-form';
 import MiniPostCard from './MiniPostCard';
 import { useOurStore } from '../store/states';
+import { useRouter } from 'next/navigation';
 
 const CreatePost = () => {
     const { post, setPost, resetPost, setPostToComment,haveProfile, setHaveProfile, setPostPosting, setPostMedia, setPostText, setPostPreview, setPostUploading, setPostTags } = useOurStore((state) => state);
     const { text, media, preview, tags, uploading, posting, postToComment } = post;
+    const router = useRouter();
 
     const addTags = (e) => {
         setPostTags([...tags, e.target.value]);
@@ -37,6 +39,7 @@ const CreatePost = () => {
             if (res.status === 201) {
                 resetPost();
                 toggleCreatePostModal();
+                router.refresh();
             }
             if (res.status === 404 ) {
                 setHaveProfile(false);

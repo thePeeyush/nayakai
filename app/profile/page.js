@@ -6,16 +6,24 @@ import { auth } from "../../auth";
 import ProfileBar from "../../components/ProfileBar";
 import ProfileSettingModal from "../../components/ProfileSettingModal";
 import PostCard from "../../components/PostCard";
+import Link from "next/link";
+import FollowBtn from "../../components/FollowBtn";
+import FetchProfile from "../../components/fetchProfile";
 
 const ProfilePage = async ({ searchParams }) => {
   const session = await auth();
-  if (!session) {
-    redirect("/api/auth/signin");
-  }
   async function getProfile(searchParams) {
-    const userID = searchParams?.id || session.user.id;
     const url = new URL(getUrl() + "/api/profile");
-    url.searchParams.append("id", userID);
+    const profileID = searchParams.id;
+    if (profileID) {
+      url.searchParams.append("profileID", profileID);
+    } else {
+      if (!session) {
+        redirect("/api/auth/signin");
+      }
+      const userID = session.user.id;
+      url.searchParams.append("userID", userID);
+    }
     const res = await fetch(url, { method: "GET", cache: "no-store" });
     if (!res.ok) {
       redirect("/profile/create");
@@ -25,30 +33,50 @@ const ProfilePage = async ({ searchParams }) => {
   }
 
   const profile = await getProfile(searchParams);
-  console.log(profile)
 
   if (!profile) {
     redirect("/profile/create");
   }
 
   return (
-    <div className="mt-16 w-full absolute md:p-4">
-      <div className="flex flex-wrap items-center gap-4 p-4 w-full max-w-xl mx-auto md:border rounded-lg">
-        <div className="avatar">
-          <Image
-            src={profile.profilePic}
-            alt="profile"
-            width={200}
-            height={200}
-            className="rounded-lg"
-          />
+    <div className="w-full overflow-y-auto lg:-ml-36 gap-4 overflow-hidden py-16 lg:py-28">
+      <div className="flex flex-wrap items-center max-w-xl mx-auto md:border rounded-2xl  overflow-hidden w-full h-auto text-black shadow-white shadow-sm">
+        
+        <div className="w-full relative overflow-hidden">
+        <FetchProfile />
+        <Image
+          src={profile.profilePic}
+          alt="profile"
+          width={200}
+          height={200}
+          className=" absolute top-0 left-0 w-full h-full"
+        />
+          <div className="flex flex-wrap gap-4 items-end w-full min-h-48 mt-auto p-4 backdrop-blur-3xl">
+            <div className="avatar w-32">
+              <Image
+                src={profile.profilePic}
+                alt="profile"
+                width={200}
+                height={200}
+                className="rounded-full"
+              />
+            </div>
+              <h1 className="text-5xl md:text-7xl text-white drop-shadow-md shadow-black font-semibold">{profile?.name}</h1>
+            <div className="z-10 flex flex-wrap gap-4  md:text-md mt-8">
+              <h2 className="p-2 px-4 bg-white bg-opacity-40 text-black w-fit rounded-3xl">@{profile?.userName}</h2>
+              <div className="flex items-center gap-4  p-2 px-4 bg-white bg-opacity-40 text-black w-fit rounded-3xl"> 
+                <p>{profile?.followers.length} followers</p>
+                <p>{profile?.following.length} following</p>
+              </div>
+              <p className=" p-2 px-4 bg-white bg-opacity-40 text-black w-fit rounded-3xl">{profile?.bio}</p>
+            </div>
+            <div className="z-10 grow">
+
+              {profile?.userID === session?.user.id ? <ProfileSettingModal /> : <FollowBtn profileID={profile?._id} />}
+            </div>
+          </div>
+
         </div>
-        <div className="">
-          <h1 className="text-lg font-semibold">{profile?.name}</h1>
-          <h2 className="text-sm text-gray-500">@{profile?.userName}</h2>
-          <p className="">{profile?.bio}</p>
-        </div>
-        <ProfileSettingModal />
         <ProfileBar profile={profile} />
         {
           profile.posts.map((post, index) => {

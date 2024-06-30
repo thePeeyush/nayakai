@@ -28,23 +28,23 @@ const fetchPost = async (postID) => {
 
 const PostSection = async ({ searchParams }) => {
     const post = await fetchPost(searchParams.post);
-    const comments = post.comments;
+    console.log(post);
+    const comments = post?.comments;
     return (
         <div className="w-full pt-20 lg:pt-16 overflow-y-scroll lg:overflow-hidden flex flex-col lg:flex-row">
             <div className="w-full h-auto">
-            <PostCard large={true} post={post} />
+                <PostCard large={true} post={post} />
             </div>
             <div className="min-w-fit w-ful">
                 <h1 className=" w-full text-current lg:text-start mx-auto text-2xl bg-gray-50 p-4 text-blue-5 font-light min-w-[300px]">comments<span className="text-gray-400"> ({comments.length})</span></h1>
                 <div className="flex flex-col gap-4 lg:overflow-y-scroll h-full pb-40">
                     {
-                        comments.length > 0 && comments.map((comment) => {
+                        comments?.length > 0 && comments.map((comment) => {
                             return <PostCard key={comment._id} post={comment} />
                         })
                     }
                 </div>
             </div>
-
         </div>
     )
 }

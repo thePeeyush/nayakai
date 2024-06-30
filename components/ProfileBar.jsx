@@ -3,10 +3,10 @@ import React from 'react'
 const ProfileBar = ({profile}) => {
     const [status, setStatus] = React.useState('Posts');
   return (
-    <div className="flex w-full border">
+    <div className="flex w-full border border-x-0">
           <Info status={status} onClick={()=>setStatus('Posts')} label="Posts" value={profile?.posts?.length} />
-          <Info status={status} onClick={()=>setStatus('Followers')} label="Followers" value={profile?.followers?.length} />
-          <Info status={status} onClick={()=>setStatus('Following')} label="Following" value={profile?.following?.length} />
+          <Info status={status} onClick={()=>setStatus('liked')} label="liked" value={profile?.likes?.length} />
+          <Info status={status} onClick={()=>setStatus('saved')} label="saved" value={0} />
         </div>
   )
 }

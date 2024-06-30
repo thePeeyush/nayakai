@@ -5,12 +5,20 @@ import { ObjectId } from "mongodb";
 
 export async function GET(request) {
     const searchParams = request.nextUrl.searchParams;
-    const userID = new ObjectId(searchParams.get('id'));
+    const profileID = searchParams.get('profileID');
+    const userID = searchParams.get('userID');
     try {
+        let option = { _id: profileID }
+
+        if (!profileID) {
+            const ID = new ObjectId(userID);
+            option = { userID : ID }
+        }
+
         console.log('connecting--------🛠️')
         await connectDB();
         console.log('✅:::::::::connected')
-        const result = await Profile.findOne({ userID }).populate({
+        const result = await Profile.findOne(option).populate({
             path: "posts",
             options: { limit: 20 },
             populate: {

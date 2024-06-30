@@ -12,6 +12,7 @@ import { toggleCreatePostModal } from "./ModalForPost";
 import getUrl from "../utils/getUrl";
 import Link from "next/link";
 import { BsChevronLeft } from "react-icons/bs";
+import PostOptions from "./PostOption";
 
 const PostCard = ({ post, large }) => {
     const { content, media, comments, likes, dislikes, views, createdAt: date, _id: postID, level } = post;
@@ -20,19 +21,19 @@ const PostCard = ({ post, large }) => {
     const [isDisliked, setIsDisliked] = useState(false);
     const [likeCount, setLikeCount] = useState(0);
     const [dislikeCount, setDislikeCount] = useState(0);
-    const {setPost, setPostToComment , userLikes, userDislikes} = useOurStore((state) => state);
+    const [copied, setCopied] = useState(false);
+    const { setPost, setPostToComment, userLikes, userDislikes } = useOurStore((state) => state);
 
     useEffect(() => {
         if (post) {
-            setLikeCount(likes);
-            setDislikeCount(dislikes);
+            setLikeCount(likes.length);
+            setDislikeCount(dislikes.length);
             setIsLiked(userLikes.includes(postID));
             setIsDisliked(userDislikes.includes(postID));
         }
-        console.log(postID)
     }, [post, userLikes, userDislikes]);
 
-    
+
 
     const handleLike = async () => {
         if (isDisliked) {
@@ -41,7 +42,7 @@ const PostCard = ({ post, large }) => {
             setLikeCount(likeCount + 1);
             setIsLiked(true);
             const result = await likePost(postID);
-            if(result) return;
+            if (result) return;
             setDislikeCount(dislikeCount + 1);
             setIsDisliked(true);
             setLikeCount(likeCount - 1);
@@ -72,7 +73,7 @@ const PostCard = ({ post, large }) => {
             setDislikeCount(dislikeCount + 1);
             setIsDisliked(true);
             const result = await dislikePost(postID);
-            if(result) return;
+            if (result) return;
             setLikeCount(likeCount + 1);
             setIsLiked(true);
             setDislikeCount(dislikeCount - 1);
@@ -82,7 +83,7 @@ const PostCard = ({ post, large }) => {
             setDislikeCount(dislikeCount - 1);
             setIsDisliked(false);
             const result = await dislikePost(postID);
-            if(result) return;
+            if (result) return;
             setDislikeCount(dislikeCount + 1);
             setIsDisliked(true);
             return;
@@ -90,7 +91,7 @@ const PostCard = ({ post, large }) => {
         setDislikeCount(dislikeCount + 1);
         setIsDisliked(true);
         const result = await dislikePost(postID);
-        if(result) return;
+        if (result) return;
         setDislikeCount(dislikeCount - 1);
         setIsDisliked(false);
     };
@@ -109,16 +110,26 @@ const PostCard = ({ post, large }) => {
         toggleCreatePostModal();
     };
 
+    const handleShare = async () => {
+        await navigator.clipboard.writeText(`${getUrl()}/post?post=${postID}`);
+        setCopied(true);
+        setTimeout(() => {
+            setCopied(false);
+        }, 3000);
+    };
+
     return (
-        <div className={`flex flex-col w-full ${large ? "px-4 border-b-0 border-r h-full overflow-auto " : "max-w-lg"} items-center border-b mx-auto p-2`} >
+        <div className={`flex flex-col w-full ${large ? "px-4 border-b-0 border-r h-full overflow-auto " : "max-w-xl"} items-center border-b mx-auto p-2`} >
             <div className="flex justify-start w-full py-2 gap-2">
 
                 {large && <BsChevronLeft className="text-2xl p-2 mt-[2px] cursor-pointer min-w-10 w-10 h-10 rounded-full hover:bg-gray-200 " onClick={() => window.history.back()} />}
-                <img
-                    className=" min-w-10 w-10 h-10 rounded-full mt-[2px]"
-                    src={authorProfilePic}
-                    alt="author Image"
-                />
+                <Link href={`${getUrl()}/profile?id=${authorID}`}>
+                    <img
+                        className=" min-w-10 w-10 h-10 rounded-full mt-[2px]"
+                        src={authorProfilePic}
+                        alt="author Image"
+                    />
+                </Link>
                 <div className="flex flex-col">
                     <div className="flex items-center gap-2">
                         <h1 className=" font-semibold  text-sm md:text-base truncate max-w-32 md:max-w-52" style={{ WebkitLineClamp: 1 }}>
@@ -138,6 +149,7 @@ const PostCard = ({ post, large }) => {
                         )}
                     </h1>
                 </div>
+                    <PostOptions postID={postID} />
             </div>
 
             <div className={`carousel carousel-center rounded-md w-full min-w-full h-auto max-h-[70vh] ${large ? "" : ""} relative`}>
@@ -190,9 +202,10 @@ const PostCard = ({ post, large }) => {
                     <CiChat1 />{" "}
                 </CardBtn>
                 <CardBtn
+                    onClick={handleShare}
                     color={"hover:text-pink-500"}
                     bgColor={"hover:bg-pink-500"}
-                    title=""
+                    title={copied ? "copied" : ""}
                 >
                     <CiShare1 />
                 </CardBtn>
