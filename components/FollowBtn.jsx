@@ -23,7 +23,7 @@ const FollowBtn = ({ profileID }) => {
     }
 
   return (
-    <button className={`btn ${follow ? "btn-outline text-white" : "bg-white"} hover:bg-gray-200 hover:bg-opacity-20 md:px-8 lg:px-12  ml-auto rounded-full w-full`} onClick={handleFollow}>
+    <button className={`btn ${follow ? "btn-outline text-white" : "bg-white text-black outline-none border-none"} hover:bg-gray-200 hover:bg-opacity-20 md:px-8 lg:px-12  ml-auto rounded-full w-full`} onClick={handleFollow}>
         { follow ? "Unfollow" : "Follow"}
     </button>
   )

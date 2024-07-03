@@ -97,13 +97,14 @@ const CreateProfile = () => {
     }
 
     return (
-        <div className="absolute w-full">
+        <div className="w-full pt-16 lg:pt-2 ">
             <div className="flex flex-col gap-4 p-8 mx-auto max-w-xl">
-                <h1>Create Profile</h1>
                 <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 items-center w-full">
                     <div>
-                        <Image src={profilePicture} width={100} height={100} className='bg-gray-800 w-24 rounded-full' alt='profile picture' />
-                        <div className='relative w-8 h-8 flex p-1 -mt-10 float-right bg-gray-200 rounded-full' >
+                        <div className="avatar min-w-10 w-24 h-24">
+                            <Image src={profilePicture} width={100} height={100} className='bg-gray-800 rounded-full' alt='profile picture' />
+                        </div>
+                        <div className='relative w-8 h-8 flex p-1 translate-y-16 -translate-x-8 float-right bg-base-200 rounded-full' >
                             {uploading ? <span className="loading loading-ring loading-md "></span> :
                                 <>
                                     <input type="file" onChange={(e) => uploadFile(e)} className="opacity-0 absolute top-0 left-0 z-10 w-8 h-8 cursor-pointer" />
@@ -117,7 +118,7 @@ const CreateProfile = () => {
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="w-4 h-4 opacity-70"><path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM12.735 14c.618 0 1.093-.561.872-1.139a6.002 6.002 0 0 0-11.215 0c-.22.578.254 1.139.872 1.139h9.47Z" /></svg>
                         <input type="text" value={data?.name} {...register("name", { onChange: (e) => setData({ ...data, name: e.target.value }) })} className="grow" placeholder="Name" />
                     </label>
-                    <p className="text-red-500" >{errors?.userName?.message}</p>
+                    <p className="text-red-500" >{errors?.name?.message}</p>
 
                     <label className="input input-bordered flex items-center gap-2 w-full">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="w-4 h-4 opacity-70"><path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM12.735 14c.618 0 1.093-.561.872-1.139a6.002 6.002 0 0 0-11.215 0c-.22.578.254 1.139.872 1.139h9.47Z" /></svg>

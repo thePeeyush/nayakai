@@ -37,7 +37,7 @@ const Searchbox = ({ text }) => {
           onKeyDown={e=> {e.key === 'Enter' && handleClick(e)}}
           type="text"
           placeholder={`Search ${text} . . .`} 
-          className=' text-left w-full pl-3 outline-none' />
+          className=' text-left w-full pl-3 outline-none bg-base-100' />
         <RxCrossCircled onClick={()=>{setInputText('')}} className={searchText?'block text-xl cursor-pointer':'hidden'}/>
       </div>
       {/* <Filter /> */}

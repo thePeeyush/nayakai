@@ -119,13 +119,13 @@ const PostCard = ({ post, large }) => {
     };
 
     return (
-        <div className={`flex flex-col w-full ${large ? "px-4 border-b-0 border-r h-full overflow-auto " : "max-w-xl"} items-center border-b mx-auto p-2`} >
+        <div className={`flex flex-col w-full ${large ? "px-4 border-b-0 border-r h-full overflow-auto " : "max-w-xl"} items-center border-b border-base-200 mx-auto p-2`} >
             <div className="flex justify-start w-full py-2 gap-2">
 
-                {large && <BsChevronLeft className="text-2xl p-2 mt-[2px] cursor-pointer min-w-10 w-10 h-10 rounded-full hover:bg-gray-200 " onClick={() => window.history.back()} />}
-                <Link href={`${getUrl()}/profile?id=${authorID}`}>
+                {large && <BsChevronLeft className="text-2xl p-2 mt-[2px] cursor-pointer min-w-10 w-10 h-10 rounded-full hidden md:block hover:bg-base-200" onClick={() => window.history.back()} />}
+                <Link className="avatar  min-w-10 w-10 h-10" href={`${getUrl()}/profile?id=${authorID}`}>
                     <img
-                        className=" min-w-10 w-10 h-10 rounded-full mt-[2px]"
+                        className=" rounded-full mt-[2px]"
                         src={authorProfilePic}
                         alt="author Image"
                     />

@@ -8,7 +8,7 @@ import { useOurStore } from '@/store/states';
 const ChatContacts = () => {
     const chatContactDisplay = useOurStore(s=>s.chatContactDisplay)
   return (
-    <div className={`mt-16 min-w-[100vw] md:min-w-[20rem] p-2 overflow-y-scroll track-hide border-r ${chatContactDisplay?'block':'hidden md:block'}`}>
+    <div className={`pt-16 lg:pt-2  min-w-[100vw] md:min-w-[20rem] p-2 overflow-y-scroll track-hide border-r border-base-200 ${chatContactDisplay?'block':'hidden md:block'}`}>
                 <PeerCard/>
                 <PeerCard/>
                 <PeerCard/>

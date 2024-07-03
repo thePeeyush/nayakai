@@ -39,8 +39,8 @@ const ProfilePage = async ({ searchParams }) => {
   }
 
   return (
-    <div className="w-full overflow-y-auto lg:-ml-36 gap-4 overflow-hidden py-16 lg:py-28">
-      <div className="flex flex-wrap items-center max-w-xl mx-auto md:border rounded-2xl  overflow-hidden w-full h-auto text-black shadow-white shadow-sm">
+    <div className="w-full overflow-y-auto lg:-ml-36 gap-4 overflow-hidden py-20 lg:py-28">
+      <div className="flex flex-wrap items-center max-w-xl mx-auto md:border border-base-200 rounded-2xl  overflow-hidden w-full h-auto">
         
         <div className="w-full relative overflow-hidden">
         <FetchProfile />
@@ -51,8 +51,8 @@ const ProfilePage = async ({ searchParams }) => {
           height={200}
           className=" absolute top-0 left-0 w-full h-full"
         />
-          <div className="flex flex-wrap gap-4 items-end w-full min-h-48 mt-auto p-4 backdrop-blur-3xl">
-            <div className="avatar w-32">
+          <div className="flex flex-wrap gap-4 items-center w-full min-h-48 mt-auto p-4 backdrop-blur-3xl">
+            <div className="avatar h-32 w-32">
               <Image
                 src={profile.profilePic}
                 alt="profile"
@@ -61,14 +61,14 @@ const ProfilePage = async ({ searchParams }) => {
                 className="rounded-full"
               />
             </div>
-              <h1 className="text-5xl md:text-7xl text-white drop-shadow-md shadow-black font-semibold">{profile?.name}</h1>
+              <h1 className="text-5xl md:text-7xl text-white drop-shadow-md shadow-black font-semibold text">{profile?.name}</h1>
             <div className="z-10 flex flex-wrap gap-4  md:text-md mt-8">
-              <h2 className="p-2 px-4 bg-white bg-opacity-40 text-black w-fit rounded-3xl">@{profile?.userName}</h2>
-              <div className="flex items-center gap-4  p-2 px-4 bg-white bg-opacity-40 text-black w-fit rounded-3xl"> 
+              <h2 className="p-2 px-4 bg-gray-200 bg-opacity-40 text-black w-fit rounded-3xl">@{profile?.userName}</h2>
+              <div className="flex items-center gap-4  p-2 px-4 bg-gray-200 bg-opacity-40 text-black w-fit rounded-3xl"> 
                 <p>{profile?.followers.length} followers</p>
                 <p>{profile?.following.length} following</p>
               </div>
-              <p className=" p-2 px-4 bg-white bg-opacity-40 text-black w-fit rounded-3xl">{profile?.bio}</p>
+              <p className=" p-2 px-4 bg-gray-200 bg-opacity-40 text-black w-fit rounded-3xl">{profile?.bio}</p>
             </div>
             <div className="z-10 grow">
 

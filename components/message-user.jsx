@@ -1,16 +1,15 @@
 import Image from "next/image";
-import { BsRobot } from "react-icons/bs";
+import { useOurStore } from "../store/states";
 
 export default function MessageUser({text}) {
+  const userProfile = useOurStore((state)=>state.userProfile);
+  const profilePic = userProfile?.profilePic;
   return (
-    // <div className='flex justify-end p-2'>
-    // <div className="p-3 bg-yellow-500 bg-opacity-25 shadow-md rounded-md text-yellow-700 max-w-2xl ml-16 ease-in">{text}</div>
-    // </div>
-    <div className='flex justify-start p-2 '>
-      <Image src="/logo.png" width={100} height={100} className='bg-gray-800 w-8 h-8 rounded-full' alt='profile picture'/>
-      <div className=" px-2 py-1 text-yellow-700 bg-yellow-200 bg-opacity-25 ml-2 rounded-md">
+    <div className='flex gap-2 p-2 justify-end ml-auto w-11/12'>
+      <div className=" px-2 py-1 text-neutral-content bg-neutral rounded-md">
         {text}
       </div>
+      <Image src={ profilePic || "/logo.png" }width={100} height={100} className='bg-gray-800 w-8 h-8 rounded-full' alt='profile picture'/>
       </div>
   )
 }

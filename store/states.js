@@ -2,6 +2,10 @@ import { create } from "zustand";
 
 export const useOurStore = create(
     (set)=>({
+
+        theme:"light",
+        changeTheme: (text)=>set(()=>({theme:text})),
+
         chat : [],
         loadingChat : false,
         addChat : ({text,isBot}) => set((state)=>({chat:[...state.chat,{text:text,isBot:isBot}]})),

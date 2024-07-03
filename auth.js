@@ -11,7 +11,10 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     events: {
         async signIn({isNewUser}) {
             if(isNewUser) {
-                redirect(`${getURL()}/api/auth/signin`)
+                redirect(`${getURL()}/profile/create`)
+            }
+            else {
+                redirect(`${getURL()}/`)
             }
         },
     }

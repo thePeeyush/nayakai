@@ -23,7 +23,7 @@ const NavBar = ({children}) => {
   },[clickCount])
   return (
      <div className='flex flex-row gap-3 items-center'>
-        <div className={`cursor-pointer text-2xl text-gray-950 lg:hidden ${pathname !== "/chat" && 'hidden' }`}>
+        <div className={`cursor-pointer text-2xl  lg:hidden ${pathname !== "/chat" && 'hidden' }`}>
            <BsChevronLeft onClick={()=>setClickCount((prev)=>prev+1)}/>
         </div>
         {

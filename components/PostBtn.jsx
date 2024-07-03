@@ -5,9 +5,9 @@ import { toggleCreatePostModal } from './ModalForPost'
 
 const PostBtn = () => {
   return (
-    <div onClick={() => toggleCreatePostModal()} className="flex">
-    <IoCreateOutline className='text-2xl'/>
-    <h1 className='hidden md:block pt-[2px]'>Post</h1>
+    <div onClick={() => toggleCreatePostModal()} className="flex lg:w-full lg:btn lg:btn-neutral lg:rounded-full">
+    <IoCreateOutline className='text-3xl'/>
+    <h1 className='hidden md:block pt-[3px] text-base'>Post</h1>
     </div>
   )
 }

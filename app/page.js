@@ -38,7 +38,7 @@ export default function Home() {
 
 
   return (
-    <div className="w-full overflow-y-auto lg:-ml-36 pt-20 lg:pt-16 gap-4 overflow-hidden">
+    <div className="w-full overflow-y-auto lg:-ml-36 pt-20 lg:pt-8 gap-4 overflow-hidden">
       {posts.length > 0 &&
         posts.map((element, index) => {
           return <PostCard key={index} post={element} />;
@@ -52,7 +52,7 @@ export default function Home() {
 
 function Loading() {
   return (
-    <div className="flex flex-col items-center w-full gap-4 max-w-lg mx-auto">
+    <div className="flex flex-col items-center w-full gap-4 max-w-xl mx-auto">
       <SkeletonCard />
       <SkeletonCard />
       <SkeletonCard />

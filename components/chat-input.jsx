@@ -41,10 +41,10 @@ export default function ChatInput() {
   }
   
   return (
-    <div className='flex flex-row justify-center items-end bg-white p-4 rounded-[15px] max-w-5xl mx-auto border w-10/12 mb-4'>
-        <div className="mic text-xl text-yellow-700 cursor-pointer"><BsMic/></div>
+    <div className='flex flex-row justify-center items-end p-4 rounded-[15px] max-w-5xl mx-auto border border-base-300 w-10/12 mb-4'>
+        {/* <div className="mic text-xl text-netral-content cursor-pointer"><BsMic/></div> */}
         <input className='w-full min-h-min outline-none px-4' value={text} onChange={(e)=>{setText(e.target.value)}} onKeyDown={(e)=>{e.key === "Enter" && handleSubmit()}} placeholder='Ask me anything...'/>
-        {text !== "" ? <button className="send text-xl text-yellow-700 cursor-pointer outline-none" onClick={handleSubmit} ><BiSend/></button> : <RiChatNewLine className=" text-yellow-700  text-xl cursor-pointer" onClick={resetChat}/>}
+        {text !== "" ? <button className="send text-xl cursor-pointer outline-none" onClick={handleSubmit} ><BiSend/></button> : <RiChatNewLine className=" text-xl cursor-pointer" onClick={resetChat}/>}
     </div>
   )
 }

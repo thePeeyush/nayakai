@@ -5,6 +5,7 @@ import Profile from '../models/Profile'
 import { redirect } from 'next/navigation';
 import getUrl from '../utils/getUrl';
 import { checkAuth } from '../utils/checkAuth';
+import { signIn } from '../auth';
 
 //Post Actions:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::;
 
@@ -99,3 +100,9 @@ export async function followProfile(profileID) {
     }
 }
 
+
+//Auth Actions:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::;
+
+export default async function SignInWithGoogle() {
+    await signIn("google");
+}
