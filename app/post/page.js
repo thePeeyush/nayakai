@@ -28,7 +28,6 @@ const fetchPost = async (postID) => {
 
 const PostSection = async ({ searchParams }) => {
     const post = await fetchPost(searchParams.post);
-    console.log(post);
     const comments = post?.comments;
     return (
         <div className="w-full lg:pt-2 pt-16 overflow-y-scroll lg:overflow-hidden flex flex-col lg:flex-row">

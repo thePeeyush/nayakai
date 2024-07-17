@@ -8,6 +8,9 @@ import { getURL } from "next/dist/shared/lib/utils"
 export const { handlers, signIn, signOut, auth } = NextAuth({
     providers: [Google],
     adapter: MongoDBAdapter(clientPromise),
+    pages: {
+        signIn: '/auth',
+    },
     events: {
         async signIn({isNewUser}) {
             if(isNewUser) {

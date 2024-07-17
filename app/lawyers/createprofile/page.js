@@ -51,9 +51,9 @@ export default function Page() {
     }
 
     return (
-        <div className="p-4 lg:px-16 mt-16 overflow-y-scroll w-full">
-            {!submited ? <form onSubmit={handleSubmit(onSubmit)} className={submited ? 'hidden' : 'flex flex-col gap-2 w-full max-w-xs'}>
-                <h1>Create Profile</h1>
+        <div className=" mt-16 lg:mt-0 overflow-y-scroll w-full">
+                <h1 className=" bg-accent p-2 text-center lg:text-left lg:px-32 font-semibold">Create Lawyer Profile</h1>
+            {!submited ? <form onSubmit={handleSubmit(onSubmit)} className={submited ? 'hidden' : 'flex flex-col gap-2 w-full mx-auto lg:mx-0 p-4 lg:px-16'}>
                 <Input register={register} name={"name"} question={"What is your Name?"} placeholder={"fullname"} label={errors.name && errors.name.message}/>
                 <Input register={register} name={"dob"}  question={"Your Date Of Birth?"} placeholder={"04-25-2003"} label={errors.dob && errors.dob.message} type={"date"}/>
                 <Input register={register} name={"phone"} question={"Your Phone Number?"} placeholder={"9925665125"} label={errors.phone && errors.phone.message} type={"number"}/>
@@ -61,7 +61,7 @@ export default function Page() {
                 <Input register={register} name={"state"} question={"Address : State?"} placeholder={"state like Madhya Pradesh"} label={errors.state && errors.state.message}/>
                 <Input register={register} name={"district"} question={"Address : District?"} placeholder={"your district"} label={errors.district && errors.district.message}/>
                 <Input register={register} name={"city"} question={"Address : City?"} placeholder={"your city"} label={errors.city && errors.city.message}/>
-                <button type="submit" disabled={btnClick} className="btn">SUBMIT</button>
+                <button type="submit" disabled={btnClick} className="btn max-w-xs">SUBMIT</button>
             </form> : <h1 className="indicator-item indicator-center indicator-middle badge badge-success"> ✅ Done</h1> }
         </div>
     );

@@ -3,7 +3,7 @@ import { create } from "zustand";
 export const useOurStore = create(
     (set)=>({
 
-        theme:"light",
+        theme: typeof localStorage !== "undefined" ? localStorage.getItem("theme") || "light"  : "light",
         changeTheme: (text)=>set(()=>({theme:text})),
 
         chat : [],

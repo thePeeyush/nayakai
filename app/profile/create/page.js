@@ -12,6 +12,7 @@ import { LuImagePlus } from "react-icons/lu";
 import { useEffect } from 'react'
 import { useOurStore } from '../../../store/states'
 import uploadMedia from '../../../utils/uploadMedia'
+import Link from 'next/link'
 
 const CreateProfile = () => {
 
@@ -129,7 +130,9 @@ const CreateProfile = () => {
                     <textarea name="bio" value={data?.bio}  {...register("bio", { onChange: (e) => setData({ ...data, bio: e.target.value }) })} placeholder='Tell us about yourself' className='input input-bordered h-20 pt-2 w-full' id="bio"></textarea>
                     <p className="text-red-500" >{errors?.bio?.message}</p>
 
-                    <button type="submit" disabled={submiting || uploading} className="btn">{submiting ? "Updating..." : "Update"}</button>
+                    <button type="submit" disabled={submiting || uploading} className="btn w-full grow">{submiting ? "Updating..." : "Update"}</button>
+                    <Link href={`${getUrl()}/lawyers/createprofile`} className='link text-xs'> Register as Lawyer</Link>
+
                 </form>
             </div>
         </div>

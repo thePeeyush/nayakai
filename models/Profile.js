@@ -64,13 +64,18 @@ const profileSchema = new Schema({
         type: [Schema.Types.ObjectId],
         required: true,
     },
+    saved: {
+        type: [Schema.Types.ObjectId],
+        required: true,
+    },
     notifications: {
         type: [Schema.Types.ObjectId],
         required: true,
     },
-    saved: {
-        type: [Schema.Types.ObjectId],
+    activeStatus: {
+        type: Boolean,
         required: true,
+        default: true
     },
     specific_role: {
         type: {
