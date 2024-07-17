@@ -12,11 +12,11 @@ export default function MorePosts() {
   const [page, setPage] = useState(1);
   const loaderRef = useRef(null);
   const isInView = useInView(loaderRef);
-  
+
   useEffect(() => {
-      if (isInView) {
-        fetchPosts({ page: page + 1 });
-      }
+    if (isInView) {
+      fetchPosts({ page: page + 1 });
+    }
   }, [isInView]);
 
   const fetchPosts = async ({ page }) => {
@@ -34,15 +34,15 @@ export default function MorePosts() {
   };
 
   return (
-    <div className="w-full overflow-y-auto lg:-ml-36 pt-20 lg:pt-8 gap-4 overflow-hidden">
+    <>
       {posts.length > 0 &&
-        posts.map((element, index) => {
-          return <PostCard key={index} post={element} />;
+        posts.map((post, index) => {
+          return <PostCard key={post._id} post={post} />;
         })}
       <div ref={loaderRef} className="w-full">
         <Loading />
       </div>
-    </div>
+    </>
   );
 }
 

@@ -26,12 +26,10 @@ const fetchInitialPosts = async () => {
 const PostsSection = async () => {
   const posts = await fetchInitialPosts();
   return (
-    <div>
     <div className="w-full overflow-y-auto lg:-ml-36 pt-20 lg:pt-8 gap-4 overflow-hidden">
       { posts?.length > 0 && posts.map((post) => {
         return <PostCard key={post._id} post={post} />
       })}
-    </div>
     <MorePosts/>
     </div>
   )
