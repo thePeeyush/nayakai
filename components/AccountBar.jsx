@@ -12,7 +12,7 @@ const AccountBar = async () => {
     return (
       <div className="dropdown lg:dropdown-top dropdown-hover">
         <div tabIndex={0} role="button"><ProfilePicture /></div>
-        <ul tabIndex={0} className="dropdown-content menu bg-base-100 z-[1] w-52 p-2 shadow rounded-lg">
+        <ul tabIndex={0} className="dropdown-content menu bg-base-100 bg-opacity-50 z-[1] w-52 p-2 shadow rounded-lg ">
           <li className='bg-base-200 rounded-lg'><Link href={'/profile'}><CiLogin />Your Profile</Link></li>
           <Theme />
         </ul>

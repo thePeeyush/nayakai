@@ -8,7 +8,7 @@ const ProfileSettingModal = () => {
   return (
     <>
       <div className="dropdown dropdown-end absolute right-5 top-12">
-        <div tabIndex={0} role="button" className="-mt-7">
+        <div tabIndex={0} role="button" className="-mt-7 text-black shadow-md shadow-white">
           <IoSettingsOutline />
         </div>
         <ul

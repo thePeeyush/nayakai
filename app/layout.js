@@ -8,6 +8,7 @@ import AccountBar from "../components/AccountBar";
 import GroupTabs from "../components/GroupTabs";
 import PostBtn from "../components/PostBtn";
 import ThemeWrapper from "../components/ThemeWrapper";
+import ModalForAi from "../components/ModalForAi";
 
 const ourFont = Noto_Sans({
   subsets: ["latin"],
@@ -35,6 +36,7 @@ export default function RootLayout({ children }) {
                 <PostBtn />
               </Nav>
               <ModalForPost />
+              <ModalForAi />
             </GroupTabs>
             {children}
           </hgroup>

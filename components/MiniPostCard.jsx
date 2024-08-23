@@ -1,7 +1,7 @@
 const MiniPostCard = ({ post }) => {
     const { content, date, authorName, authorUserName, authorProfilePic } = post;
     return (
-        <div className="flex justify-start w-full py-2 gap-2 bg-amber-100 text-black p-2 rounded-md overflow-hidden">
+        <div className="flex justify-start w-full py-2 gap-2 bg-primary text-primary-content p-2 rounded-md overflow-hidden">
             <img
                 className=" sm:min-w-10 w-8 h-8 sm:w-10 sm:h-10 rounded-full"
                 src={authorProfilePic}

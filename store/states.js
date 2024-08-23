@@ -1,16 +1,23 @@
 import { create } from "zustand";
+import getTheme from "../utils/getTheme";
 
 export const useOurStore = create(
     (set)=>({
 
-        theme: typeof localStorage !== "undefined" ? localStorage.getItem("theme") || "light"  : "light",
+        theme: 'black',
         changeTheme: (text)=>set(()=>({theme:text})),
 
         chat : [],
         loadingChat : false,
-        addChat : ({text,isBot}) => set((state)=>({chat:[...state.chat,{text:text,isBot:isBot}]})),
-        resetChat: ()=>set(()=>({chat:[]})),
+        conversationID : null,
+        addChat : ({text,isBot,imageURL,sources}) => set((state)=>({chat:[...state.chat,{text:text,isBot:isBot,imageURL:imageURL||null,sources:sources}]})),
+        resetChat: ()=>set(()=>({
+            chat : [],
+            conversationID : null,
+            loadingChat : false
+        })),
         setLoading : (bool)=>set(()=>({loadingChat:bool})),
+        setConversationID: (id)=>set(()=>({conversationID:id})),
 
         language:"English",
         changeLanguage: (text)=>set(()=>({language:text})),

@@ -6,7 +6,7 @@ import { BiCurrentLocation, BiMailSend, BiPhoneCall } from 'react-icons/bi'
 const ContactCard = () => {
   const [open, setOpen] = React.useState(false)
   return (
-    <div onClick={() => setOpen(!open)} className={`flex flex-col rounded-md ${open ? 'shadow-md' : 'shadow-none'} max-w-[350px] w-full overflow-hidden hover:outline outline-1 outline-gray-200 hover:cursor-pointer hover:shadow-sm`}>
+    <div onClick={() => setOpen(!open)} className={`flex flex-col rounded-md ${open ? 'shadow-md' : 'shadow-none'} max-w-[350px] w-full overflow-hidden hover:outline outline-1 outline-base-300 hover:cursor-pointer hover:shadow-sm`}>
         <div className={`flex flex-row items-center gap-4 p-3 ${open ? 'b' : ''}`}>
             <Image src="/logo.png" width={100} height={100} className='bg-gray-800 w-12 rounded-full' alt='profile picture' />
             <div className='flex flex-col justify-center'>

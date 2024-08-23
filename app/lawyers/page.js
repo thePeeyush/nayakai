@@ -18,7 +18,7 @@ async function getLawyers(searchParams) {
 export default function Page({ searchParams }) {
   return (
 
-    <div className="p-4 lg:px-16 mt-16 overflow-y-scroll w-full">
+    <div className="p-4 lg:px-16 mt-16 lg:mt-0 overflow-y-scroll w-full">
       <Searchbox text={"Lawyers"} />
       <Suspense fallback={<Loading />}>
         <LawyersSection searchParams={searchParams} />

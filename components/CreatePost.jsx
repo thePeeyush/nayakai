@@ -75,7 +75,7 @@ const CreatePost = () => {
     }
 
     return (
-        <form onSubmit={handleSubmit(uploadPost)} className="flex flex-col gap-5 mt-4 rounded mx-auto max-w-3xl ">
+        <form onSubmit={handleSubmit(uploadPost)} className="flex flex-col gap-5 mt-4 rounded mx-auto max-w-3xl">
             {postToComment?.postID && <MiniPostCard post={postToComment} />}
             <textarea {...register("content", { required: true })} autoFocus={true} value={text} onChange={(e) => setPostText(e.target.value)} placeholder='Describe your thougts here...' className={` bg-transparent outline-none border-none min-w-72 w-full min-h-40`} type="text" />
             {errors.content && <p className='text-red-500 text-xs bg-red-50 p-2 w-full rounded-sm' >👆 Text Content is required</p>}

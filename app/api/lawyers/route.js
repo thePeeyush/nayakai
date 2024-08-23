@@ -13,7 +13,7 @@ export async function GET(req) {
     let result;
     const pipeline = [{
       $search: {
-        index: 'searchLawyer',
+        index: 'lawyers',
         text: {
           query: search,
           path: {wildcard : '*'},

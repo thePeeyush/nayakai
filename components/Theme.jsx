@@ -17,11 +17,11 @@ const Theme = () => {
             <button className='flex flex-col justify-center items-center gap-2 w-full h-full p-2 bg-white text-black hover:bg-gray-200 rounded-lg border-black border' onClick={() => {changeTheme('light')}}>
                 <CiLight className='text-3xl' />
                 <p className='text-[10px]'>Light</p>
-                </button>
-            <button className='flex flex-col justify-center items-center gap-2 w-full h-full p-2 bg-black text-white hover:bg-slate-900 rounded-md border-white border' onClick={() => {changeTheme('black')}}>
+            </button>
+            <button className='flex flex-col justify-center items-center gap-2 w-full h-full p-2 bg-black text-white hover:bg-stone-900 rounded-md border-white border' onClick={() => {changeTheme('black')}}>
                  <MdDarkMode className='text-3xl'/> 
                  <p className='text-[10px]'>Dark</p>
-                 </button>
+            </button>
         </div>
     )
 }

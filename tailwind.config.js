@@ -16,6 +16,17 @@ module.exports = {
   },
   plugins: [require("daisyui")],
   daisyui: {
-    themes: ["light","black"],
+    themes: [{
+      light: {
+        ...require("daisyui/src/theming/themes")["light"],
+      },
+      black: {
+        ...require("daisyui/src/theming/themes")["black"],
+        "--rounded-box": "1rem",
+        "--rounded-btn": "0.5rem",
+        "--rounded-badge": "0.4rem",
+        "--tab-radius": "0.7rem",
+      },
+    }],
   },
 }

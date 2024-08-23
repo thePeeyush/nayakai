@@ -4,9 +4,11 @@ import { PiDotsThreeVertical } from "react-icons/pi";
 import { useOurStore } from '../store/states';
 import { deletePost } from '../server/action';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 const PostOptions = ({ postID }) => {
   const userProfile = useOurStore((state) => state.userProfile);
+  const router  = useRouter();
   const isMyPost = userProfile?.posts?.includes(postID);
   const [deleted, setDeleted] = useState(false);
   const [deleting, setDeleting] = useState(false);
@@ -16,6 +18,7 @@ const PostOptions = ({ postID }) => {
     if(!result) return;
     setDeleting(false);
     setDeleted(true);
+    router.refresh();
   }
   if (!isMyPost) return;
   return (
@@ -32,7 +35,7 @@ const PostOptions = ({ postID }) => {
           <li>
             <button
               onClick={handleDelete}
-              className="text-red-500"
+              className="text-red-500 hover:bg-red-500 hover:bg-opacity-30 backdrop-blur-md"
               disabled={deleting}
             >
               {deleting ? "Deleting... " : "Delete"}
