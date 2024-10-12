@@ -35,6 +35,7 @@ export default function ChatInput({ className }) {
           setConversationID(null);
         }
         setLoading(false);
+         console.log(message);
         addChat({ text: message, isBot: true , sources});
       }
     }
@@ -62,7 +63,7 @@ export default function ChatInput({ className }) {
     const options = {
       method: 'POST',
       headers: {
-        'x-rapidapi-key': 'e30eeb7046msh0e269dd30c0aabfp10baf5jsn6cc47664a3cb',
+        'x-rapidapi-key': '6cec93a8e8mshc6234f8b83351aep1a36f7jsn4aed416f62b3',
         'x-rapidapi-host': 'copilot5.p.rapidapi.com',
         'Content-Type': 'application/json'
       },

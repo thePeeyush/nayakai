@@ -5,8 +5,8 @@ const ProfileBar = ({profile}) => {
   return (
     <div className="flex w-full border border-x-0 border-base-200">
           <Info status={status} onClick={()=>setStatus('Posts')} label="Posts" value={profile?.posts?.length} />
-          <Info status={status} onClick={()=>setStatus('liked')} label="liked" value={profile?.likes?.length} />
-          <Info status={status} onClick={()=>setStatus('saved')} label="saved" value={0} />
+          <Info status={status} onClick={()=>setStatus('followers')} label="followers" value={profile?.followers.length} />
+          <Info status={status} onClick={()=>setStatus('following')} label="following" value={profile?.following.length} />
         </div>
   )
 }

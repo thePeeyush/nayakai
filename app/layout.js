@@ -17,7 +17,7 @@ const ourFont = Noto_Sans({
 
 export const metadata = {
   title: "nayak AI",
-  description: "birge between legal service and people",
+  description: "bridge between legal service and people",
 };
 
 export default function RootLayout({ children }) {

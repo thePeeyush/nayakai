@@ -3,6 +3,7 @@ import { TextGenerateEffect } from './generateText';
 import { HiSparkles } from "react-icons/hi2";
 import { MdOutlinePauseCircle, MdContentCopy, MdOutlineDone } from "react-icons/md";
 import { useState } from 'react';
+import Link from 'next/link';
 
 export default function MessageAi({ text, sources }) {
 
@@ -36,7 +37,9 @@ export default function MessageAi({ text, sources }) {
     <div className='flex w-11/12'>
       <HiSparkles className='text-3xl min-w-7 text-blue-500' />
       <div className=" py-1 px-4 w-full max-w-fit">
-        <TextGenerateEffect words={text} />
+        <text>
+        {text}
+        </text>
         <div className="flex flex-wrap gap-2 text-md pt-3">
           <p onClick={handleCopyText} className={`cursor-pointer opacity-50 hover:opacity-100`}>{copied ? <MdOutlineDone /> : <MdContentCopy />}</p>
           <div className="cursor-pointer opacity-50 hover:opacity-100">{playing ? <MdOutlinePauseCircle onClick={handlePauseSpeaker} /> : <BiVolumeFull onClick={() => handleSpeaker(text)} />}</div>
@@ -45,7 +48,7 @@ export default function MessageAi({ text, sources }) {
               if (index > 3) return;
               const url = new URL(source.url);
               const host = url.hostname;
-              return <a key={index} className="text-xs -translate-y-1 text-blue-500 hover:text-blue-600 hover:underline hover:underline-offset-8 cursor-pointer p-1 border border-base-300 rounded-md" href={source.url} target="_blank" rel="noreferrer">{host}</a>
+              return <Link key={index} className="text-xs -translate-y-1 text-blue-500 hover:text-blue-600 hover:underline hover:underline-offset-8 cursor-pointer p-1 border border-base-300 rounded-md" href={source.url} target="_blank" rel="noreferrer">{host}</Link>
             })}
         </div>
       </div>

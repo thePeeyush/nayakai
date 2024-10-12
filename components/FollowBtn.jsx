@@ -22,11 +22,18 @@ const FollowBtn = ({ profileID }) => {
         router.refresh();
     }
 
-  return (
-    <button className={`btn ${follow ? "btn-outline text-white" : "bg-white text-black outline-none border-none"} hover:bg-gray-200 hover:bg-opacity-20 md:px-8 lg:px-12  ml-auto rounded-full w-full`} onClick={handleFollow}>
-        { follow ? "Unfollow" : "Follow"}
-    </button>
-  )
+    if (follow) {
+      return (
+        <div className='flex flex-row items-center w-full'>
+        <div className='w-1/2 pr-2'><button className={`btn ${follow ? "btn-outline text-white" : "bg-white text-black outline-none border-none"} hover:bg-gray-200 hover:bg-opacity-20 md:px-8 lg:px-12 rounded-full w-full`} onClick={handleFollow}>Unfollow</button></div>
+        <div className='w-1/2 pl-2'><button className={`btn bg-white text-black outline-none border-none hover:bg-gray-200 hover:bg-opacity-20 md:px-8 lg:px-12  ml-auto rounded-full w-full`}>Message</button></div>
+        </div>
+      )
+    }else {
+      return (
+        <button className={`btn ${follow ? "btn-outline text-white" : "bg-white text-black outline-none border-none"} hover:bg-gray-200 hover:bg-opacity-20 md:px-8 lg:px-12  ml-auto rounded-full w-full`} onClick={handleFollow}>follow</button>
+      )
+    }
 }
 
 export default FollowBtn

@@ -1,5 +1,6 @@
 'use client'
 import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 import { BiChat, BiPhoneCall, BiVideo } from 'react-icons/bi'
 
@@ -23,7 +24,7 @@ const LawyerCard = ({ information }) => {
       <div className={`flex flex-row bg-base-300 bg-opacity-30 text-2xl p-3 justify-between ${open ? 'flex' : 'hidden'}`}>
         <div className='bg-green-700 text-white py-1 px-3 rounded-full text-xs'>online</div>
         <div className=' flex flex-row gap-3 cursor-pointer'>
-          <a href={`tel:+91${phone}`}><BiPhoneCall className=' hover:text-green-700 ' /></a>
+          <Link href={`tel:+91${phone}`}><BiPhoneCall className=' hover:text-green-700 ' /></Link>
           <BiVideo className=' hover:text-green-700 ' />
           <BiChat className=' hover:text-green-700 ' />
         </div>

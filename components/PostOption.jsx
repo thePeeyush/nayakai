@@ -1,17 +1,19 @@
 'use client'
 import React from 'react'
 import { PiDotsThreeVertical } from "react-icons/pi";
+import { MdDelete } from "react-icons/md";
 import { useOurStore } from '../store/states';
 import { deletePost } from '../server/action';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-const PostOptions = ({ postID }) => {
+const PostOptions = ({ postID, autherID }) => {
   const userProfile = useOurStore((state) => state.userProfile);
   const router  = useRouter();
-  const isMyPost = userProfile?.posts?.includes(postID);
   const [deleted, setDeleted] = useState(false);
   const [deleting, setDeleting] = useState(false);
+  const isMyPost = userProfile?._id === autherID;
+
   const handleDelete = async () => {
     setDeleting(true);
     const result = await deletePost(postID);
@@ -35,9 +37,10 @@ const PostOptions = ({ postID }) => {
           <li>
             <button
               onClick={handleDelete}
-              className="text-red-500 hover:bg-red-500 hover:bg-opacity-30 backdrop-blur-md"
+              className="text-red-500 bg-base-200 hover:bg-red-500 hover:bg-opacity-30 backdrop-blur-md"
               disabled={deleting}
             >
+            <span><MdDelete className="text-red-500 text-xl" /></span>
               {deleting ? "Deleting... " : "Delete"}
             </button>
           </li>

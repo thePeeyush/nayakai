@@ -149,7 +149,7 @@ const PostCard = ({ post, large }) => {
                         )}
                     </h1>
                 </div>
-                    <PostOptions postID={postID} />
+                <PostOptions postID={postID} autherID={authorID} />
             </div>
 
             <div className={`carousel carousel-center rounded-md w-full min-w-full h-auto max-h-[70vh] ${large ? "" : ""} relative`}>

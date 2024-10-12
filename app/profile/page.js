@@ -33,7 +33,6 @@ const ProfilePage = async ({ searchParams }) => {
   }
 
   const profile = await getProfile(searchParams);
-  console.log(profile);
 
   if (!profile) {
     redirect("/profile/create");
@@ -42,16 +41,16 @@ const ProfilePage = async ({ searchParams }) => {
   return (
     <div className="w-full overflow-y-auto lg:-ml-36 gap-4 overflow-hidden py-20 lg:py-28">
       <div className="flex flex-wrap items-center max-w-xl mx-auto md:border border-base-200 rounded-2xl  overflow-hidden w-full h-auto">
-        
+
         <div className="w-full relative overflow-hidden">
-        <FetchProfile />
-        <Image
-          src={profile.profilePic}
-          alt="profile"
-          width={200}
-          height={200}
-          className=" absolute top-0 left-0 w-full h-full"
-        />
+          <FetchProfile />
+          <Image
+            src={profile.profilePic}
+            alt="profile"
+            width={200}
+            height={200}
+            className=" absolute top-0 left-0 w-full h-full"
+          />
           <div className="flex flex-wrap gap-4 items-center w-full min-h-48 mt-auto p-4 backdrop-blur-3xl">
             <div className="avatar h-32 w-32">
               <Image
@@ -62,19 +61,15 @@ const ProfilePage = async ({ searchParams }) => {
                 className="rounded-full"
               />
             </div>
-              <h1 className="text-5xl md:text-7xl text-white drop-shadow-md shadow-black font-semibold text">{profile?.name}</h1>
-            <div className="z-10 flex flex-wrap gap-4  md:text-md mt-8">
+            <h1 className="text-5xl md:text-7xl text-white drop-shadow-md shadow-black font-semibold text">{profile?.name}</h1>
+            <div className="z-10 flex flex-wrap gap-4 text-base-content md:text-md mt-8 w-full">
               {profile?.specific_role && (
-              <h2 className="p-2 px-4 bg-amber-800 text-white w-fit rounded-3xl">⚖️ {profile?.specific_role?.role}</h2>
+                <h2 className="p-2 px-4 bg-amber-800 text-white w-fit rounded-3xl">⚖️ {profile?.specific_role?.role}</h2>
               )}
-              <h2 className="p-2 px-4 bg-gray-200 bg-opacity-40 text-black w-fit rounded-3xl">@{profile?.userName}</h2>
-              <div className="flex items-center gap-4  p-2 px-4 bg-gray-200 bg-opacity-40 text-black w-fit rounded-3xl"> 
-                <p>{profile?.followers.length} followers</p>
-                <p>{profile?.following.length} following</p>
-              </div>
-              <p className=" p-2 px-4 bg-gray-200 bg-opacity-40 text-black w-fit rounded-3xl">{profile?.bio}</p>
+              <h2 className="p-2 px-4 w-fit rounded-3xl bg-base-100 bg-opacity-50">@{profile?.userName}</h2>
+              <p className=" p-2 px-4 w-fit rounded-3xl bg-base-100 bg-opacity-50">{profile?.bio}</p>
             </div>
-            <div className="z-10 grow">
+            <div className="z-10 grow max-w-xl">
               {profile?.userID === session?.user.id ? <ProfileSettingModal /> : <FollowBtn profileID={profile?._id} />}
             </div>
           </div>

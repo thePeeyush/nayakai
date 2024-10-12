@@ -1,5 +1,6 @@
 'use client'
 import { useOurStore } from "@/store/states";
+import Link from "next/link";
 import { BsTranslate, BsChevronDown } from 'react-icons/bs';
 
 
@@ -14,13 +15,13 @@ const Translatebtn = () => {
                 <BsChevronDown className=' hidden md:block w-fit' />
             </div>
             <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
-                <li onClick={(e)=>{changeLanguage(e.target.innerText)}} className=''><a>English</a></li>
-                {/* <li onClick={(e)=>{changeLanguage(e.target.innerText)}} className=''><a>Hindi</a></li>
-                <li onClick={(e)=>{changeLanguage(e.target.innerText)}} className=''><a>Punjabi</a></li>
-                <li onClick={(e)=>{changeLanguage(e.target.innerText)}} className=''><a>Sanskrit</a></li>
-                <li onClick={(e)=>{changeLanguage(e.target.innerText)}} className=''><a>Tamil</a></li>
-                <li onClick={(e)=>{changeLanguage(e.target.innerText)}} className=''><a>Marathi</a></li>
-                <li onClick={(e)=>{changeLanguage(e.target.innerText)}} className=''><a>Gujrati</a></li> */}
+                <li onClick={(e)=>{changeLanguage(e.target.innerText)}} className=''><Link>English</Link></li>
+                {/* <li onClick={(e)=>{changeLanguage(e.target.innerText)}} className=''><Link>Hindi</Link></li>
+                <li onClick={(e)=>{changeLanguage(e.target.innerText)}} className=''><Link>Punjabi</Link></li>
+                <li onClick={(e)=>{changeLanguage(e.target.innerText)}} className=''><Link>Sanskrit</Link></li>
+                <li onClick={(e)=>{changeLanguage(e.target.innerText)}} className=''><Link>Tamil</Link></li>
+                <li onClick={(e)=>{changeLanguage(e.target.innerText)}} className=''><Link>Marathi</Link></li>
+                <li onClick={(e)=>{changeLanguage(e.target.innerText)}} className=''><Link>Gujrati</Link></li> */}
             </ul>
         </div>
     )
