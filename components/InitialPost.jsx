@@ -13,7 +13,7 @@ const InitialPost = () => {
 
 const fetchInitialPosts = async () => {
     try {
-        const url = `${getUrl()}/api/content?page=${1}`;
+        const url = `${getUrl()}/api/content?page=${0}`;
         const res = await fetch(url, { method: "GET", cache: "no-store" });
         const posts = (await res.json()).result;
         return posts;
