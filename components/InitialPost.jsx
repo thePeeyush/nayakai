@@ -12,14 +12,14 @@ const InitialPost = () => {
 }
 
 const fetchInitialPosts = async () => {
-    // try {
-    //     const url = `${getUrl()}/api/content?page=${1}`;
-    //     const res = await fetch(url, { method: "GET", cache: "no-store" });
-    //     const posts = (await res.json()).result;
-    //     return posts;
-    // } catch (error) {
-    //     console.log(error);
-    // }
+    try {
+        const url = `${getUrl()}/api/content?page=${1}`;
+        const res = await fetch(url, { method: "GET", cache: "no-store" });
+        const posts = (await res.json()).result;
+        return posts;
+    } catch (error) {
+        console.log(error);
+    }
 };
 
 const PostsSection = async () => {
